@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>FitTrack - Your Fitness Companion</title>
+    
+    
+    
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#home" class="nav-brand" data-nav="home">FitTrack</a>
+            <ul class="nav-links">
+                <li><a href="#home" class="nav-link active" data-nav="home">Home</a></li>
+                <li><a href="#steps" class="nav-link" data-nav="steps">Steps</a></li>
+                <li><a href="#weekly" class="nav-link" data-nav="weekly">Weekly</a></li>
+                <li><a href="#water" class="nav-link" data-nav="water">Water</a></li>
+                <li><a href="#quotes" class="nav-link" data-nav="quotes">Quotes</a></li>
+                <li><a href="#nutrition" class="nav-link" data-nav="nutrition">Nutrition</a></li>
+                <li><a href="#profile" class="nav-link" data-nav="profile">Profile</a></li>
+                <li><a href="#progress" class="nav-link" data-nav="progress">Progress</a></li>
+                <li><a href="#distance" class="nav-link" data-nav="distance">Distance</a></li>
+                <li><a href="images.html">Images</a></li>
+                <li><a href="#settings" class="nav-link" data-nav="settings">Settings</a></li>
+                <li><a href="#about" class="nav-link" data-nav="about">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    
+    <section id="home" class="page-section active">
+        <div class="page-header">
+            <h1 class="page-title" id="welcomeMessage">Welcome back 👋</h1>
+            <p class="page-subtitle" id="currentDate"></p>
+        </div>
+
+        <main class="container dashboard">
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <div class="dashboard-card-icon">👟</div>
+                    <h3 class="dashboard-card-title">Today's Steps</h3>
+                    <div class="dashboard-card-value" id="todaySteps">0</div>
+                    <p class="dashboard-card-label">Goal: 10,000 steps</p>
+                </div>
+
+                <div class="dashboard-card">
+                    <div class="dashboard-card-icon">💧</div>
+                    <h3 class="dashboard-card-title">Water Intake</h3>
+                    <div class="dashboard-card-value" id="waterIntake">0</div>
+                    <p class="dashboard-card-label">Goal: 8 glasses</p>
+                </div>
+
+                <div class="dashboard-card">
+                    <div class="dashboard-card-icon">🔥</div>
+                    <h3 class="dashboard-card-title">Current Streak</h3>
+                    <div class="dashboard-card-value" id="currentStreak">0</div>
+                    <p class="dashboard-card-label">Days in a row</p>
+                </div>
+            </div>
+
+            <h2 style="text-align: center; margin: 2rem 0 1.5rem; color: var(--text-dark);">Quick Access</h2>
+            <div class="dashboard-grid">
+                <a href="#steps" class="dashboard-card" data-nav="steps">
+                    <div class="dashboard-card-icon">📱</div>
+                    <h3 class="dashboard-card-title">Step Counter</h3>
+                    <p class="dashboard-card-label">Track your steps in real-time</p>
+                </a>
+
+                <a href="#weekly" class="dashboard-card" data-nav="weekly">
+                    <div class="dashboard-card-icon">📊</div>
+                    <h3 class="dashboard-card-title">Weekly Summary</h3>
+                    <p class="dashboard-card-label">View your weekly progress</p>
+                </a>
+
+                <a href="#water" class="dashboard-card" data-nav="water">
+                    <div class="dashboard-card-icon">🚰</div>
+                    <h3 class="dashboard-card-title">Water Tracker</h3>
+                    <p class="dashboard-card-label">Stay hydrated daily</p>
+                </a>
+
+                <a href="#quotes" class="dashboard-card" data-nav="quotes">
+                    <div class="dashboard-card-icon">💪</div>
+                    <h3 class="dashboard-card-title">Daily Motivation</h3>
+                    <p class="dashboard-card-label">Get inspired</p>
+                </a>
+            </div>
+        </main>
+    </section>
+
+    
+    <section id="steps" class="page-section">
+        <div class="page-header">
+            <h1 class="page-title">Step Counter</h1>
+            <p class="page-subtitle" id="dateDisplay"></p>
+        </div>
+
+        <main class="container">
+            <div class="card step-counter-card">
+                <div class="progress-container">
+                    <svg class="progress-ring" viewBox="0 0 200 200" width="280" height="280">
+                        <g transform="rotate(-90 100 100)">
+                            <circle class="progress-ring-circle-bg" stroke="#e5d8c8" stroke-width="14" fill="transparent" r="86" cx="100" cy="100"/>
+                            <circle class="progress-ring-circle" stroke="#c49a6c" stroke-width="14" fill="transparent" r="86" cx="100" cy="100"/>
+                        </g>
+                    </svg>
+                    <div class="step-count-text">
+                        <div class="step-number" id="stepNumber">0</div>
+                        <div class="step-label">Steps</div>
+                    </div>
+                </div>
+
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <span class="stat-icon">🔥</span>
+                        <span class="stat-value" id="caloriesBurned">0</span>
+                        <span class="stat-label">Calories</span>
+                    </div>
+                    <div class="stat-item distance-stat">
+                        <span class="stat-icon">📍</span>
+                        <span class="stat-value" id="distanceKm">0.00</span>
+                        <span class="stat-label">Kilometers</span>
+                    </div>
+                </div>
+
+                <button class="btn btn-full" id="startStopBtn">Start Tracking</button>
+                <button class="btn btn-full btn-secondary" id="resetBtn">Reset</button>
+
+                <div class="status-message" id="statusMessage">Ready to track your steps!</div>
+            </div>
+        </main>
+    </section>
+
+    
+    <section id="weekly" class="page-section">
+        <div class="page-header">
+            <h1 class="page-title">Weekly Progress</h1>
+            <p class="page-subtitle">Track your weekly step goals</p>
+        </div>
+
+        <main class="container">
+            <div class="card weekly-card">
+                <h2 class="weekly-title">This Week</h2>
+                <div class="weekly-list" id="weeklyList">
+                    <div class="weekly-item" data-day="Monday">
+                        <span class="day-name">Mon</span>
+                        <span class="day-steps">0 steps</span>
+                    </div>
+                    <div class="weekly-item" data-day="Tuesday">
+                        <span class="day-name">Tue</span>
+                        <span class="day-steps">0 steps</span>
+                    </div>
+                    <div class="weekly-item" data-day="Wednesday">
+                        <span class="day-name">Wed</span>
+                        <span class="day-steps">0 steps</span>
+                    </div>
+                    <div class="weekly-item" data-day="Thursday">
+                        <span class="day-name">Thu</span>
+                        <span class="day-steps">0 steps</span>
+                    </div>
+                    <div class="weekly-item" data-day="Friday">
+                        <span class="day-name">Fri</span>
+                        <span class="day-steps">0 steps</span>
+                    </div>
+                    <div class="weekly-item" data-day="Saturday">
+                        <span class="day-name">Sat</span>
+                        <span class="day-steps">0 steps</span>
+                    </div>
+                    <div class="weekly-item" data-day="Sunday">
+                        <span class="day-name">Sun</span>
+                        <span class="day-steps">0 steps</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </section>
+
+    
+    <section id="water" class="page-section">
+        <div class="page-header">
+            <h1 class="page-title">Water Intake Tracker</h1>
+            <p class="page-subtitle">Stay hydrated, stay healthy</p>
+        </div>
+
+        <main class="container">
+            <div class="card">
+                <div class="dashboard-card-icon" style="font-size: 4rem; margin-bottom: 1rem;">💧</div>
+                
+                <h2 style="text-align: center; font-size: 2.5rem; color: var(--accent-color); margin-bottom: 1rem;">
+                    <span id="waterCount">0</span> / 8
+                </h2>
+                <p style="text-align: center; font-size: 1.1rem; color: #8b7355; margin-bottom: 2rem;">Glasses</p>
+
+                <div class="progress-bar-container">
+                    <div class="progress-bar-fill" id="waterProgress" style="width: 0%;">
+                        <span id="waterPercentage">0%</span>
+                    </div>
+                </div>
+
+                <div id="waterGlasses" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin: 2rem 0;"></div>
+
+                <button class="btn btn-full" id="addGlassBtn" style="margin-bottom: 1rem;">+ Add Glass</button>
+                <button class="btn btn-full btn-secondary" id="resetWaterBtn">Reset</button>
+
+                <div class="status-message" id="statusMessage-water">Start tracking your water intake!</div>
+            </div>
+        </main>
+    </section>
+
+    
+    <section id="quotes" class="page-section">
+        <div class="page-header">
+            <h1 class="page-title">Daily Motivation</h1>
+            <p class="page-subtitle">Get inspired to reach your goals</p>
+        </div>
+
+        <main class="container">
+            <div class="card quote-card">
+                <div class="quote-icon">💪</div>
+                <blockquote class="quote-text" id="quoteText">Loading your daily inspiration...</blockquote>
+                <p class="quote-author" id="quoteAuthor">- Anonymous</p>
+                <button class="btn btn-full" id="newQuoteBtn">Get New Quote</button>
+            </div>
+        </main>
+    </section>
+
+    
+    <section id="nutrition" class="page-section">
+        <div class="page-header">
+            <h1 class="page-title">Nutrition Guide</h1>
+            <p class="page-subtitle">Fuel your body right</p>
+        </div>
+
+        <main class="container">
+            <div class="card">
+                <p class="nutrition-intro">
+                    A balanced diet is essential for maintaining good health and fitness. 
+                    Here are some recommended healthy foods to include in your daily meals.
+                </p>
+
+                <div class="food-grid" id="foodGrid"></div>
+            </div>
+        </main>
+    </section>
+
+    
+    <section id="profile" class="page-section">
+        <div class="page-header">
+            <h1 class="page-title">User Profile</h1>
+            <p class="page-subtitle">Manage your fitness profile</p>
+        </div>
+
+        <main class="container">
+            <div class="card profile-container">
+                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=User" alt="Profile Avatar" class="profile-avatar" id="profileAvatar" loading="lazy" decoding="async">
+                
+                <h2 class="profile-name" id="profileName">User</h2>
+                <p class="profile-role">Fitness Enthusiast</p>
+                
+                <button class="change-name-btn" id="changeNameBtn" onclick="showEditNameModal()">
+                    ✏️ Change Name
+                </button>
+
+                <div class="form-group">
+                    <label for="weightInput" class="form-label">Weight (kg)</label>
+                    <input type="number" id="weightInput" class="form-input" placeholder="Enter your weight" min="1" max="500">
+                </div>
+
+                <div id="weightDisplay" style="text-align: center; margin-bottom: 1.5rem; font-size: 1.1rem; color: var(--accent-color);"></div>
+
+                <button class="btn btn-full" id="saveWeightBtn">Save Weight</button>
+
+                <div class="status-message" id="statusMessage-profile" style="margin-top: 1.5rem; display: none;">
+                    Profile updated successfully!
+                </div>
+            </div>
+        </main>
+    </section>
+
+    
+    <section id="progress" class="page-section">
+        <div class="page-header">
+            <h1 class="page-title">Your Progress</h1>
+            <p class="page-subtitle">Track your fitness journey</p>
+        </div>
+
+        <main class="container">
+            <div class="card">
+                <h2 style="text-align: center; margin-bottom: 2rem;">Progress Overview</h2>
+                
+                <div class="progress-stats">
+                    <div class="progress-stat-item">
+                        <span class="progress-stat-label">Total Steps This Month</span>
+                        <span class="progress-stat-value" id="monthlySteps">0</span>
+                    </div>
+                    <div class="progress-stat-item">
+                        <span class="progress-stat-label">Average Daily Steps</span>
+                        <span class="progress-stat-value" id="avgSteps">0</span>
+                    </div>
+                    <div class="progress-stat-item">
+                        <span class="progress-stat-label">Total Distance (km)</span>
+                        <span class="progress-stat-value" id="totalDistance">0</span>
+                    </div>
+                    <div class="progress-stat-item">
+                        <span class="progress-stat-label">Current Streak</span>
+                        <span class="progress-stat-value" id="streakDays">0 days</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </section>
+
+    
+    <section id="distance" class="page-section">
+        <div class="page-header">
+            <h1 class="page-title">Distance Tracker</h1>
+            <p class="page-subtitle">Track how far you've walked</p>
+        </div>
+
+        <main class="container">
+            <div class="card">
+                <div class="dashboard-card-icon" style="font-size: 4rem; margin-bottom: 1rem;">📍</div>
+                
+                <h2 style="text-align: center; font-size: 3rem; color: var(--accent-color); margin-bottom: 0.5rem;" id="distanceDisplay">
+                    0.00 km
+                </h2>
+                <p style="text-align: center; font-size: 1.2rem; color: #8b7355; margin-bottom: 2rem;">Today's Distance</p>
+
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <span class="stat-icon">👟</span>
+                        <span class="stat-value" id="distanceSteps">0</span>
+                        <span class="stat-label">Steps</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-icon">🔥</span>
+                        <span class="stat-value" id="distanceCalories">0</span>
+                        <span class="stat-label">Calories</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </section>
+
+    
+    <section id="settings" class="page-section">
+        <div class="page-header">
+            <h1 class="page-title">Settings</h1>
+            <p class="page-subtitle">Customize your experience</p>
+        </div>
+
+        <main class="container">
+            <div class="card">
+                <div class="settings-group">
+                    <h3 class="settings-title">Daily Goals</h3>
+                    
+                    <div class="form-group">
+                        <label for="stepGoal" class="form-label">Step Goal</label>
+                        <input type="number" id="stepGoal" class="form-input" placeholder="10000" min="1000" max="100000">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="waterGoal" class="form-label">Water Goal (glasses)</label>
+                        <input type="number" id="waterGoal" class="form-input" placeholder="8" min="1" max="20">
+                    </div>
+                </div>
+
+                <div class="settings-group">
+                    <h3 class="settings-title">Theme</h3>
+                    <button class="btn btn-full" id="toggleThemeBtn">Toggle Dark Mode</button>
+                </div>
+
+                <button class="btn btn-full btn-primary" id="saveSettingsBtn">Save Settings</button>
+                
+                <div class="status-message" id="statusMessage-settings" style="margin-top: 1.5rem; display: none;">
+                    Settings saved successfully!
+                </div>
+            </div>
+        </main>
+    </section>
+
+    
+    <section id="about" class="page-section">
+        <div class="page-header">
+            <h1 class="page-title">About FitTrack</h1>
+            <p class="page-subtitle">Your personal fitness companion</p>
+        </div>
+
+        <main class="container">
+            <div class="card">
+                <div class="about-content">
+                    <h2 style="text-align: center; margin-bottom: 1.5rem;">Welcome to FitTrack</h2>
+                    
+                    <p style="line-height: 1.8; margin-bottom: 1.5rem;">
+                        FitTrack is your all-in-one fitness tracking companion designed to help you 
+                        achieve your health and wellness goals. Track your steps, monitor your water 
+                        intake, get motivated with daily quotes, and much more!
+                    </p>
+
+                    <h3 style="margin-top: 2rem; margin-bottom: 1rem;">Features</h3>
+                    <ul style="line-height: 2; margin-bottom: 1.5rem;">
+                        <li>📱 Real-time step counting</li>
+                        <li>📊 Weekly progress tracking</li>
+                        <li>💧 Water intake monitoring</li>
+                        <li>💪 Daily motivational quotes</li>
+                        <li>🍎 Nutrition guidance</li>
+                        <li>👤 Personalized profile</li>
+                        <li>📍 Distance tracking</li>
+                        <li>⚙️ Customizable settings</li>
+                    </ul>
+
+                    <p style="line-height: 1.8;">
+                        Built with ❤️ for fitness enthusiasts who want a simple, 
+                        effective way to track their daily health metrics.
+                    </p>
+                </div>
+            </div>
+        </main>
+    </section>
+
+    
+    <footer class="footer">
+        <p>&copy; 2026 FitTrack. All rights reserved.</p>
+    </footer>
+
+    
+    <script src="theme.js" defer></script>
+    <script src="user-name.js" defer></script>
+    <script src="router.js" defer></script>
+    <script src="index.js" defer></script>
+    <script src="steps.js" defer></script>
+    <script src="weekly.js" defer></script>
+    <script src="water.js" defer></script>
+    <script src="quotes.js" defer></script>
+    <script src="profile.js" defer></script>
+    <script src="progress.js" defer></script>
+    <script src="settings.js" defer></script>
+</body>
+</html>

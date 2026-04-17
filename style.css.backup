@@ -1,0 +1,2248 @@
+/* Root Variables */
+:root {
+    --bg-color: #f5efe6;
+    --navbar-bg: #5a3e2b;
+    --accent-color: #c49a6c;
+    --card-bg: #ffffff;
+    --text-dark: #3b2a20;
+    --text-light: #f5efe6;
+    --shadow: rgba(90, 62, 43, 0.1);
+}
+
+/* ========== SPA SECTION STYLES ========== */
+/* Hide all sections by default */
+.page-section {
+    display: none;
+    opacity: 0;
+    animation: fadeIn 0.15s ease-in-out forwards;
+}
+
+/* Show active section */
+.page-section.active {
+    display: block;
+    opacity: 1;
+}
+
+/* Smooth fade-in animation for sections - OPTIMIZED */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Mobile performance - ultra-fast */
+@media (max-width: 768px) {
+    .page-section {
+        animation: fadeIn 0.1s ease-out forwards;
+    }
+}
+
+/* ========== DARK MODE STYLES ========== */
+body.dark {
+    background-color: #1e1e1e;
+    color: #f5f5f5;
+    --bg-color: #1e1e1e;
+    --navbar-bg: #2a2a2a;
+    --card-bg: #333333;
+    --text-dark: #f5f5f5;
+    --text-light: #ffffff;
+    --shadow: rgba(0, 0, 0, 0.5);
+}
+
+body.dark .navbar {
+    background-color: #2a2a2a;
+}
+
+body.dark .nav-brand,
+body.dark .nav-links a {
+    color: #f5f5f5;
+}
+
+body.dark .nav-links a:hover,
+body.dark .nav-links a.active {
+    background-color: #c49a6c;
+    color: #000;
+}
+
+body.dark .card,
+body.dark .food-card,
+body.dark .profile-card,
+body.dark .settings-card,
+body.dark .dashboard-card,
+body.dark .stat-card,
+body.dark .achievement-card {
+    background-color: #333333;
+    color: #ffffff;
+}
+
+body.dark .page-header {
+    background: linear-gradient(135deg, #2a2a2a, #3a3a3a);
+    color: #f5f5f5;
+}
+
+body.dark .page-title,
+body.dark .page-subtitle {
+    color: #f5f5f5;
+}
+
+body.dark a {
+    color: #f5f5f5;
+}
+
+body.dark .button,
+body.dark .btn,
+body.dark .primary-btn,
+body.dark .secondary-btn {
+    background-color: #c49a6c;
+    color: #000;
+}
+
+body.dark .button:hover,
+body.dark .btn:hover,
+body.dark .primary-btn:hover {
+    background-color: #d4a876;
+}
+
+body.dark .toggle-container {
+    background-color: #2a2a2a;
+}
+
+body.dark .toggle-label,
+body.dark h1, body.dark h2, body.dark h3, body.dark h4, body.dark h5, body.dark h6 {
+    color: #f5f5f5;
+}
+
+body.dark p,
+body.dark .dashboard-card-label,
+body.dark .dashboard-card-title,
+body.dark .stat-label {
+    color: #e0e0e0;
+}
+
+body.dark input,
+body.dark select,
+body.dark textarea {
+    background-color: #2a2a2a;
+    color: #f5f5f5;
+    border-color: #555;
+}
+
+body.dark .footer {
+    background-color: #2a2a2a;
+    color: #f5f5f5;
+}
+
+body.dark .quote-container {
+    background: linear-gradient(135deg, #c49a6c, #8b7355);
+}
+
+body.dark .status-message {
+    color: #c49a6c;
+    background-color: #2a2a2a;
+}
+
+body.dark .progress-bar {
+    background-color: #2a2a2a;
+}
+
+body.dark .progress-fill,
+body.dark .progress-bar-fill {
+    background: linear-gradient(90deg, #c49a6c, #d4a876);
+}
+
+body.dark .chart-container,
+body.dark .stats-grid {
+    background-color: #333333;
+}
+
+body.dark .weekly-item {
+    background-color: #2a2a2a;
+}
+
+body.dark .weekly-item.current-day {
+    background-color: #c49a6c;
+}
+
+body.dark .daily-goal-text,
+body.dark .calories-container {
+    background-color: #2a2a2a;
+}
+
+body.dark .progress-bar-container {
+    background-color: #2a2a2a;
+}
+
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ========================================
+   PERFORMANCE OPTIMIZATIONS
+   ======================================== */
+
+/* Lightweight page fade-in animation for smoother perceived navigation */
+@keyframes pageFadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.page-fade-in {
+    animation: pageFadeIn 0.2s ease-out;
+    animation-fill-mode: both;
+}
+
+/* Optimize font rendering */
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+/* Hardware acceleration for smooth transitions - OPTIMIZED */
+.navbar {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
+
+.nav-links a,
+.btn,
+.card,
+.dashboard-card {
+    /* Remove will-change for performance - only use when actively animating */
+    backface-visibility: hidden;
+}
+
+/* MOBILE-FIRST BASE STYLES (320px - 480px) */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-dark);
+    min-height: 100vh;
+    padding-top: 70px;
+    padding-bottom: 70px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    overflow-x: hidden;
+}
+
+/* Mobile-First Navigation Bar */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: var(--navbar-bg);
+    padding: 0 0.5rem;
+    height: auto;
+    min-height: 70px;
+    box-shadow: 0 2px 10px var(--shadow);
+    z-index: 1000;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    display: flex;
+    align-items: center;
+}
+
+.navbar::-webkit-scrollbar {
+    height: 4px;
+}
+
+.navbar::-webkit-scrollbar-thumb {
+    background-color: var(--accent-color);
+    border-radius: 2px;
+}
+
+.nav-container {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    min-width: max-content;
+    height: 100%;
+    padding: 0.5rem 0;
+}
+
+.nav-brand {
+    color: var(--text-light);
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-decoration: none;
+    margin-right: 0.5rem;
+    white-space: nowrap;
+}
+
+.nav-links {
+    display: flex;
+    gap: 0.6rem;
+    list-style: none;
+}
+
+.nav-links a {
+    color: var(--text-light);
+    text-decoration: none;
+    font-size: 0.75rem;
+    font-weight: 500;
+    transition: background-color 0.15s ease;
+    padding: 0.5rem 0.6rem;
+    min-height: 32px; /* Touch-friendly minimum */
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    -webkit-tap-highlight-color: transparent;
+    /* PERFORMANCE FIX: Remove color transition, use only background */
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    background-color: rgba(196, 154, 108, 0.2);
+    /* Color stays constant for better performance */
+}
+
+/* Footer */
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: var(--navbar-bg);
+    color: var(--text-light);
+    text-align: center;
+    padding: 1rem;
+    font-size: 0.85rem;
+    box-shadow: 0 -2px 10px var(--shadow);
+}
+
+/* Date Display */
+.date-display {
+    text-align: center;
+    padding: 1rem;
+    color: var(--text-dark);
+    font-size: 1rem;
+    font-weight: 500;
+    background-color: rgba(196, 154, 108, 0.1);
+}
+
+/* Page Header - Mobile First */
+.page-header {
+    text-align: center;
+    padding: 1rem 0.8rem;
+    background-color: rgba(196, 154, 108, 0.1);
+}
+
+.page-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 0.5rem;
+}
+
+.page-subtitle {
+    font-size: 0.85rem;
+    color: #8b7355;
+}
+
+/* Main Container - Mobile First */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 0.8rem;
+    min-height: calc(100vh - 140px);
+    min-height: calc(100svh - 140px); /* iOS Safari fix */
+    width: 100%;
+}
+
+.container.dashboard {
+    flex-direction: column;
+    align-items: stretch;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 1rem 0.8rem;
+}
+
+/* Dashboard Cards Grid - Mobile First (Single Column) */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.dashboard-card {
+    background-color: var(--card-bg);
+    border-radius: 16px;
+    padding: 1.2rem;
+    box-shadow: 0 4px 15px var(--shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-decoration: none;
+    color: var(--text-dark);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px var(--shadow);
+}
+
+.dashboard-card-icon {
+    font-size: 2rem;
+    margin-bottom: 0.8rem;
+    text-align: center;
+}
+
+.dashboard-card-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    text-align: center;
+    width: 100%;
+}
+
+.dashboard-card-value {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--accent-color);
+    margin-bottom: 0.5rem;
+    text-align: center;
+    width: 100%;
+}
+
+.dashboard-card-label {
+    font-size: 0.85rem;
+    color: #8b7355;
+    text-align: center;
+    width: 100%;
+}
+
+/* Card Styling - Mobile First */
+.card {
+    background-color: var(--card-bg);
+    border-radius: 20px;
+    padding: 1.5rem 1rem;
+    box-shadow: 0 8px 30px var(--shadow);
+    max-width: 100%;
+    width: 100%;
+    text-align: center;
+}
+
+/* Step Counter Card - Centered and properly sized */
+.step-counter-card {
+    max-width: 340px;
+    margin: 0 auto;
+    padding: 1.2rem 0.8rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* Progress Ring - Base styles only (overridden by final section) */
+.progress-ring-circle {
+    stroke-dasharray: 816.8;
+    stroke-dashoffset: 816.8;
+    transition: stroke-dashoffset 0.5s ease;
+    stroke-linecap: round;
+}
+
+/* Progress Content - Mobile First */
+.progress-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 100%;
+}
+
+.step-count {
+    font-size: 2.3rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    line-height: 1;
+    margin-bottom: 0.3rem;
+}
+
+.step-label {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--accent-color);
+    margin-bottom: 0.5rem;
+}
+
+/* Daily Goal Text - Mobile First */
+.daily-goal-text {
+    font-size: 0.85rem;
+    color: #8b7355;
+    font-weight: 500;
+    margin-bottom: 1.2rem;
+    padding: 0.7rem;
+    background-color: #faf7f2;
+    border-radius: 12px;
+}
+
+/* Calories Container - Mobile First */
+.calories-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.7rem;
+    padding: 1rem;
+    background-color: #faf7f2;
+    border-radius: 16px;
+    margin-bottom: 1.5rem;
+}
+
+.calories-icon {
+    font-size: 1.8rem;
+}
+
+.calories-text {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text-dark);
+}
+
+#calories {
+    font-weight: 700;
+    color: var(--accent-color);
+    font-size: 1.1rem;
+}
+
+/* Buttons - Mobile First (Full Width) */
+.btn {
+    width: 100%;
+    padding: 0.8rem 1.5rem;
+    min-height: 44px; /* Touch-friendly minimum */
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(196, 154, 108, 0.3);
+    display: block;
+    text-decoration: none;
+    text-align: center;
+    -webkit-tap-highlight-color: transparent; /* Remove tap highlight on mobile */
+}
+
+.btn:hover {
+    background-color: #b08758;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(196, 154, 108, 0.4);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn-full {
+    width: 100%;
+}
+
+.btn-secondary {
+    background-color: #8b7355;
+}
+
+.btn-secondary:hover {
+    background-color: #6f5c44;
+}
+
+/* Primary and Secondary button aliases for consistency */
+.primary-btn {
+    background-color: var(--accent-color);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    min-height: 44px;
+    border: none;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.primary-btn:hover {
+    background-color: #b08758;
+}
+
+.secondary-btn {
+    background-color: #8b7355;
+    color: white;
+    padding: 0.8rem 1.5rem;
+    min-height: 44px;
+    border: none;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.secondary-btn:hover {
+    background-color: #6f5c44;
+}
+
+/* Reset Button - Mobile First */
+.reset-btn {
+    width: 100%;
+    padding: 0.8rem 1.5rem;
+    min-height: 44px; /* Touch-friendly minimum */
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(196, 154, 108, 0.3);
+    -webkit-tap-highlight-color: transparent;
+}
+
+.reset-btn:hover {
+    background-color: #b08758;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(196, 154, 108, 0.4);
+}
+
+.reset-btn:active {
+    transform: translateY(0);
+}
+
+/* Form Inputs - Mobile First (Full Width) */
+.form-group {
+    margin-bottom: 1.2rem;
+}
+
+.form-label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 0.5rem;
+}
+
+.form-input,
+input[type="text"],
+input[type="number"],
+input[type="email"],
+input[type="password"],
+select,
+textarea {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    min-height: 44px; /* Touch-friendly minimum */
+    border: 2px solid #e0d5c7;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--card-bg);
+    color: var(--text-dark);
+    transition: border-color 0.3s ease;
+    box-sizing: border-box;
+}
+
+.form-input:focus,
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(196, 154, 108, 0.1);
+}
+
+/* Status Message */
+.status-message {
+    margin-top: 1.5rem;
+    padding: 0.8rem;
+    background-color: #fff9f0;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    color: #8b7355;
+    border-left: 3px solid var(--accent-color);
+}
+
+/* Progress Bar - Mobile First */
+.progress-bar-container {
+    width: 100%;
+    height: 25px;
+    background-color: #e0d5c7;
+    border-radius: 15px;
+    overflow: hidden;
+    margin: 1rem 0;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent-color), #d4a876);
+    border-radius: 15px;
+    transition: width 0.5s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+/* Weekly Summary Card - Mobile First */
+.weekly-card {
+    margin-top: 1rem;
+}
+
+.weekly-title {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.weekly-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.weekly-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem 1rem;
+    background-color: #faf7f2;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.weekly-item.current-day {
+    background-color: var(--accent-color);
+    color: white;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(196, 154, 108, 0.3);
+}
+
+.day-name {
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.day-steps {
+    font-size: 0.85rem;
+    color: #8b7355;
+}
+
+.weekly-item.current-day .day-steps {
+    color: white;
+}
+
+/* Profile Styles - Mobile First */
+.profile-container {
+    text-align: center;
+}
+
+.profile-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 4px solid var(--accent-color);
+    margin: 0 auto 1.2rem;
+    object-fit: cover;
+}
+
+.profile-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 0.5rem;
+}
+
+.profile-role {
+    font-size: 1rem;
+    color: var(--accent-color);
+    margin-bottom: 1.5rem;
+}
+
+/* Toggle Switch - Mobile First */
+.toggle-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.9rem;
+    background-color: #faf7f2;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+}
+
+.toggle-label {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.toggle-switch {
+    position: relative;
+    width: 60px;
+    height: 30px;
+    background-color: #ccc;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.toggle-switch.active {
+    background-color: var(--accent-color);
+}
+
+.toggle-slider {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 24px;
+    height: 24px;
+    background-color: white;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+}
+
+.toggle-switch.active .toggle-slider {
+    transform: translateX(30px);
+}
+
+/* Quote Display - Mobile First */
+.quote-container {
+    background: linear-gradient(135deg, var(--accent-color), #d4a876);
+    color: white;
+    padding: 2rem 1.5rem;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 8px 30px var(--shadow);
+    margin: 1.5rem 0;
+}
+
+.quote-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.8rem;
+    opacity: 0.8;
+}
+
+.quote-text {
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.5;
+    font-style: italic;
+    margin-bottom: 0.8rem;
+}
+
+.quote-author {
+    font-size: 0.85rem;
+    opacity: 0.9;
+}
+
+/* About Page - Mobile First */
+.about-content {
+    line-height: 1.7;
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+}
+
+.about-image {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 16px;
+    margin: 1.5rem auto;
+    display: block;
+}
+
+/* Footer - Mobile First */
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: var(--navbar-bg);
+    color: var(--text-light);
+    text-align: center;
+    padding: 0.8rem;
+    font-size: 0.8rem;
+    box-shadow: 0 -2px 10px var(--shadow);
+}
+
+/* Status Message - Mobile First */
+.status-message {
+    margin-top: 1rem;
+    padding: 0.7rem;
+    background-color: #fff9f0;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    color: #8b7355;
+    border-left: 3px solid var(--accent-color);
+}
+
+/* ========== PERFORMANCE & IMAGE OPTIMIZATION ========== */
+
+/* Ensure all images are responsive and prevent layout shift */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Image containers for CLS prevention */
+.food-img,
+.about-image,
+.profile-avatar {
+    overflow: hidden;
+}
+
+/* Prevent horizontal overflow globally */
+* {
+    max-width: 100%;
+}
+
+.navbar,
+.container,
+.card,
+.dashboard-card {
+    box-sizing: border-box;
+}
+
+/* Optimize rendering performance */
+.dashboard-card,
+.card,
+.btn,
+.toggle-switch {
+    will-change: auto;
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* ========================================
+   ACCESSIBILITY IMPROVEMENTS
+   ======================================== */
+
+/* Focus styles for keyboard navigation */
+a:focus,
+button:focus,
+input:focus,
+select:focus,
+textarea:focus,
+.btn:focus,
+.nav-links a:focus {
+    outline: 3px solid var(--accent-color);
+    outline-offset: 2px;
+}
+
+/* Skip to main content link for screen readers */
+.skip-to-main {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--accent-color);
+    color: white;
+    padding: 8px;
+    text-decoration: none;
+    z-index: 100;
+}
+
+.skip-to-main:focus {
+    top: 0;
+}
+
+/* Improve text readability */
+p, li, span {
+    line-height: 1.6;
+}
+
+/* Ensure sufficient color contrast for links */
+a {
+    color: var(--accent-color);
+    text-decoration: underline;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    :root {
+        --shadow: rgba(0, 0, 0, 0.4);
+    }
+    
+    body.dark {
+        --shadow: rgba(0, 0, 0, 0.8);
+    }
+    
+    .btn,
+    .primary-btn,
+    .secondary-btn {
+        border: 2px solid currentColor;
+    }
+}
+
+/* ========================================
+   UTILITY CLASSES - Reduce Inline Styles
+   ======================================== */
+
+.text-center {
+    text-align: center;
+}
+
+.mb-1 {
+    margin-bottom: 1rem;
+}
+
+.mb-2 {
+    margin-bottom: 2rem;
+}
+
+.mt-1 {
+    margin-top: 1rem;
+}
+
+.mt-2 {
+    margin-top: 2rem;
+}
+
+.info-box {
+    background-color: #faf7f2;
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+}
+
+body.dark .info-box {
+    background-color: #2a2a2a;
+}
+
+.stat-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.stat-label {
+    color: #8b7355;
+}
+
+body.dark .stat-label {
+    color: #d4a876;
+}
+
+.stat-value {
+    color: var(--text-dark);
+    font-weight: 600;
+}
+
+.large-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+
+.large-display {
+    font-size: 3rem;
+    color: var(--accent-color);
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.display-unit {
+    font-size: 1.2rem;
+    color: #8b7355;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.compact-card {
+    max-width: 700px;
+    margin: 2rem auto;
+    padding: 2rem;
+}
+
+.hidden {
+    display: none;
+}
+
+/* ========================================
+   MOBILE-FIRST MEDIA QUERIES
+   Base: 320px-480px (already defined above)
+   ======================================== */
+
+/* EXTRA SMALL MOBILE: max-width 360px - Fine-tune for very small screens */
+@media (max-width: 360px) {
+    body {
+        font-size: 14px;
+        padding-bottom: 80px; /* Extra padding for fixed footer */
+    }
+
+    .page-title {
+        font-size: 1.1rem;
+    }
+
+    .page-subtitle {
+        font-size: 0.8rem;
+    }
+
+    .nav-brand {
+        font-size: 1rem;
+    }
+
+    .nav-links a {
+        font-size: 0.7rem;
+        padding: 0.4rem 0.5rem;
+    }
+
+    .dashboard-card-icon {
+        font-size: 1.8rem;
+    }
+
+    .dashboard-card-value {
+        font-size: 1.6rem;
+    }
+
+    .step-count {
+        font-size: 2rem;
+    }
+
+    .step-counter-card {
+        max-width: 300px;
+        padding: 1rem 0.6rem;
+    }
+
+    .daily-goal-text {
+        font-size: 0.8rem;
+        padding: 0.6rem;
+        margin-bottom: 1rem;
+    }
+
+    .calories-container {
+        padding: 0.8rem;
+        margin-bottom: 1rem;
+    }
+}
+
+/* HARD MOBILE BREAKPOINT - iPhone Safari Optimized */
+@media (max-width: 480px) {
+    /* Fix body padding and iOS safe area */
+    body {
+        padding-bottom: 0;
+        padding-bottom: env(safe-area-inset-bottom);
+    }
+
+    /* Make footer static on mobile */
+    .footer {
+        position: static !important;
+        margin-top: auto;
+    }
+
+    /* Container - compact and centered */
+    .container {
+        padding: 16px;
+        min-height: calc(100svh - 70px);
+        padding-bottom: calc(100px + env(safe-area-inset-bottom));
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* Step counter card - compact mobile UI */
+    .step-counter-card {
+        max-width: 92vw;
+        padding: 16px;
+        margin: 0;
+        max-height: none;
+    }
+
+    /* Adjust step count text size */
+    .step-count {
+        font-size: 2rem;
+    }
+
+    .step-label {
+        font-size: 0.9rem;
+    }
+
+    /* Compact spacing */
+    .daily-goal-text {
+        font-size: 0.8rem;
+        padding: 0.6rem;
+        margin-bottom: 0.8rem;
+    }
+
+    .calories-container {
+        padding: 0.8rem;
+        margin-bottom: 1rem;
+    }
+
+    .calories-icon {
+        font-size: 1.5rem;
+    }
+
+    .calories-text {
+        font-size: 0.85rem;
+    }
+
+    #calories {
+        font-size: 1rem;
+    }
+
+    /* Reduce step card height on mobile */
+    .card {
+        padding: 1.2rem 1rem;
+        max-width: 92%;
+    }
+
+    /* Compact buttons */
+    .btn,
+    .reset-btn {
+        padding: 0.7rem 1rem;
+        font-size: 0.9rem;
+        margin-bottom: 0.8rem;
+    }
+
+    .status-message {
+        font-size: 0.8rem;
+        padding: 0.6rem;
+        margin-top: 0.8rem;
+    }
+}
+
+/* TABLET: min-width 600px */
+@media (min-width: 600px) {
+    /* Navbar improvements */
+    .navbar {
+        padding: 0 1rem;
+        height: 70px;
+    }
+
+    .nav-container {
+        gap: 1.2rem;
+        padding: 0;
+    }
+
+    .nav-brand {
+        font-size: 1.25rem;
+        margin-right: 1rem;
+    }
+
+    .nav-links {
+        gap: 1rem;
+    }
+
+    .nav-links a {
+        font-size: 0.85rem;
+        padding: 0.6rem 0.7rem;
+    }
+
+    /* Page Header */
+    .page-header {
+        padding: 1.3rem 1rem;
+    }
+
+    .page-title {
+        font-size: 1.5rem;
+    }
+
+    .page-subtitle {
+        font-size: 0.95rem;
+    }
+
+    /* Container */
+    .container {
+        padding: 1.5rem 1rem;
+    }
+
+    .container.dashboard {
+        max-width: 900px;
+        padding: 1.5rem 1rem;
+    }
+
+    /* Dashboard Grid - 2 columns on tablet */
+    .dashboard-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.2rem;
+        margin-bottom: 1.8rem;
+    }
+
+    /* Dashboard Cards */
+    .dashboard-card {
+        padding: 1.3rem;
+    }
+
+    .dashboard-card-icon {
+        font-size: 2.2rem;
+    }
+
+    .dashboard-card-title {
+        font-size: 1.1rem;
+    }
+
+    .dashboard-card-value {
+        font-size: 1.9rem;
+    }
+
+    /* Card Styling */
+    .card {
+        padding: 2rem 1.5rem;
+        max-width: 500px;
+    }
+
+    .step-counter-card {
+        max-width: 420px;
+        padding: 2rem 1.5rem;
+    }
+
+    /* Progress Ring - Medium size */
+    .progress-ring {
+        width: 220px;
+        height: 220px;
+    }
+
+    .step-count {
+        font-size: 2.8rem;
+    }
+
+    .step-label {
+        font-size: 1rem;
+    }
+
+    /* Daily Goal Text */
+    .daily-goal-text {
+        font-size: 0.95rem;
+    }
+
+    /* Calories */
+    .calories-icon {
+        font-size: 2rem;
+    }
+
+    .calories-text {
+        font-size: 1rem;
+    }
+
+    #calories {
+        font-size: 1.2rem;
+    }
+
+    /* Buttons */
+    .btn,
+    .reset-btn {
+        padding: 0.9rem 1.8rem;
+        font-size: 1rem;
+    }
+
+    /* Form */
+    .form-input {
+        font-size: 1rem;
+    }
+
+    /* Progress Bar */
+    .progress-bar-container {
+        height: 28px;
+    }
+
+    .progress-bar-fill {
+        font-size: 0.8rem;
+    }
+
+    /* Weekly */
+    .weekly-title {
+        font-size: 1.2rem;
+    }
+
+    .weekly-item {
+        padding: 0.9rem 1.1rem;
+    }
+
+    /* Profile */
+    .profile-avatar {
+        width: 100px;
+        height: 100px;
+    }
+
+    .profile-name {
+        font-size: 1.6rem;
+    }
+
+    .profile-role {
+        font-size: 1.05rem;
+    }
+
+    /* Quote */
+    .quote-container {
+        padding: 2.2rem 1.8rem;
+    }
+
+    .quote-text {
+        font-size: 1.15rem;
+    }
+
+    .quote-author {
+        font-size: 0.9rem;
+    }
+
+    /* About */
+    .about-content {
+        font-size: 1rem;
+    }
+
+    .about-image {
+        max-width: 400px;
+    }
+
+    /* Footer */
+    .footer {
+        font-size: 0.85rem;
+    }
+}
+
+/* MEDIUM TABLET: min-width 768px */
+@media (min-width: 768px) {
+    .container.dashboard {
+        max-width: 1000px;
+    }
+
+    .dashboard-grid {
+        gap: 1.5rem;
+    }
+
+    .page-title {
+        font-size: 1.6rem;
+    }
+
+    .card {
+        max-width: 550px;
+    }
+}
+
+/* LAPTOP/DESKTOP: min-width 1024px */
+@media (min-width: 1024px) {
+    body {
+        padding-bottom: 80px;
+    }
+
+    /* Navbar */
+    .navbar {
+        padding: 0 2rem;
+        height: 70px;
+    }
+
+    .nav-container {
+        gap: 2rem;
+    }
+
+    .nav-brand {
+        font-size: 1.3rem;
+    }
+
+    .nav-links {
+        gap: 1.5rem;
+    }
+
+    .nav-links a {
+        font-size: 0.9rem;
+        padding: 0.7rem 1rem;
+    }
+
+    /* Page Header */
+    .page-header {
+        padding: 1.5rem 1rem;
+    }
+
+    .page-title {
+        font-size: 1.8rem;
+    }
+
+    .page-subtitle {
+        font-size: 1rem;
+    }
+
+    /* Container */
+    .container {
+        padding: 2rem 2rem;
+        min-height: calc(100vh - 150px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .container.dashboard {
+        max-width: 1200px;
+        padding: 2rem 1.5rem;
+    }
+
+    /* Dashboard Grid - 3 columns on desktop */
+    .dashboard-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    /* Dashboard Cards */
+    .dashboard-card {
+        padding: 1.5rem;
+    }
+
+    .dashboard-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .dashboard-card-icon {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .dashboard-card-title {
+        font-size: 1.2rem;
+    }
+
+    .dashboard-card-value {
+        font-size: 2rem;
+    }
+
+    .dashboard-card-label {
+        font-size: 0.9rem;
+    }
+
+    /* Card Styling */
+    .card {
+        padding: 2.5rem 2rem;
+        max-width: 450px;
+    }
+
+    .step-counter-card {
+        max-width: 480px;
+        padding: 2.5rem 2rem;
+    }
+
+    .step-counter-card {
+        max-width: 480px;
+        padding: 2.5rem 2rem;
+    }
+
+    .step-count {
+        font-size: 3.5rem;
+    }
+
+    .step-label {
+        font-size: 1.1rem;
+    }
+
+    /* Daily Goal Text */
+    .daily-goal-text {
+        font-size: 1rem;
+        padding: 0.8rem;
+        margin-bottom: 1.5rem;
+    }
+
+    /* Calories Container */
+    .calories-container {
+        padding: 1.2rem;
+        margin-bottom: 2rem;
+    }
+
+    .calories-icon {
+        font-size: 2rem;
+    }
+
+    .calories-text {
+        font-size: 1.1rem;
+    }
+
+    #calories {
+        font-size: 1.3rem;
+    }
+
+    /* Buttons */
+    .btn,
+    .reset-btn {
+        padding: 1rem 2rem;
+        font-size: 1rem;
+    }
+
+    /* Form */
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-input {
+        padding: 0.9rem 1.2rem;
+        font-size: 1rem;
+    }
+
+    /* Progress Bar */
+    .progress-bar-container {
+        height: 30px;
+    }
+
+    .progress-bar-fill {
+        font-size: 0.85rem;
+    }
+
+    /* Weekly */
+    .weekly-card {
+        margin-top: 1.5rem;
+    }
+
+    .weekly-title {
+        font-size: 1.3rem;
+        margin-bottom: 1.2rem;
+    }
+
+    .weekly-list {
+        gap: 0.6rem;
+    }
+
+    .weekly-item {
+        padding: 1rem 1.2rem;
+    }
+
+    .day-name {
+        font-size: 1rem;
+    }
+
+    .day-steps {
+        font-size: 0.95rem;
+    }
+
+    /* Profile */
+    .profile-avatar {
+        width: 120px;
+        height: 120px;
+        margin-bottom: 1.5rem;
+    }
+
+    .profile-name {
+        font-size: 1.8rem;
+    }
+
+    .profile-role {
+        font-size: 1.1rem;
+        margin-bottom: 2rem;
+    }
+
+    /* Toggle */
+    .toggle-container {
+        padding: 1rem;
+    }
+
+    .toggle-label {
+        font-size: 1rem;
+    }
+
+    /* Quote */
+    .quote-container {
+        padding: 2.5rem;
+        border-radius: 20px;
+        margin: 2rem 0;
+    }
+
+    .quote-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+    }
+
+    .quote-text {
+        font-size: 1.3rem;
+        line-height: 1.6;
+        margin-bottom: 1rem;
+    }
+
+    .quote-author {
+        font-size: 1rem;
+    }
+
+    /* About */
+    .about-content {
+        font-size: 1.05rem;
+        line-height: 1.8;
+        margin-bottom: 2rem;
+    }
+
+    .about-image {
+        max-width: 400px;
+        margin: 2rem auto;
+    }
+
+    /* Footer */
+    .footer {
+        padding: 1rem;
+        font-size: 0.85rem;
+    }
+
+    /* Status Message */
+    .status-message {
+        padding: 0.8rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* LARGE DESKTOP: min-width 1440px */
+@media (min-width: 1440px) {
+    .container.dashboard {
+        max-width: 1400px;
+        padding: 2.5rem 2rem;
+    }
+
+    .dashboard-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+
+    .card {
+        max-width: 500px;
+    }
+
+    .step-counter-card {
+        max-width: 520px;
+        padding: 3rem 2.5rem;
+    }
+
+    .container {
+        padding: 3rem 2rem;
+    }
+
+    .navbar {
+        padding: 0 3rem;
+    }
+
+    .page-header {
+        padding: 2rem 2rem;
+    }
+}
+
+/* EXTRA LARGE SCREENS: min-width 1920px - Prevent over-stretching */
+@media (min-width: 1920px) {
+    .container.dashboard {
+        max-width: 1600px;
+    }
+
+    .dashboard-grid {
+        max-width: 1500px;
+        gap: 2.5rem;
+    }
+
+    body {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 480px) {
+
+  .footer {
+    position: static !important;
+    height: auto !important;
+    margin-top: 1.5rem;
+  }
+
+  body {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .container,
+  .container.dashboard {
+    min-height: auto !important;
+    padding-bottom: 2rem !important;
+  }
+
+  .card {
+    max-width: 94% !important;
+    padding: 1rem !important;
+  }
+
+
+
+  .btn,
+  .reset-btn {
+    padding: 0.65rem 1rem !important;
+    font-size: 0.9rem !important;
+  }
+}
+
+/* ========================================
+   USER NAME PERSONALIZATION STYLES
+   ======================================== */
+
+/* Navbar Greeting */
+.navbar-greeting {
+    color: var(--text-light);
+    font-size: 0.95rem;
+    font-weight: 500;
+    margin-left: auto;
+    padding: 0.5rem 1rem;
+    background-color: rgba(196, 154, 108, 0.2);
+    border-radius: 20px;
+    white-space: nowrap;
+    transition: background-color 0.3s ease;
+}
+
+.navbar-greeting:hover {
+    background-color: rgba(196, 154, 108, 0.3);
+}
+
+/* Name Modal Overlay - OPTIMIZED FOR ALL DEVICES */
+.name-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+    padding: env(safe-area-inset-top, 16px) env(safe-area-inset-right, 16px) env(safe-area-inset-bottom, 16px) env(safe-area-inset-left, 16px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Name Modal Content - FULLY RESPONSIVE MOBILE-FIRST */
+.name-modal-content {
+    background-color: var(--card-bg);
+    padding: 20px 18px;
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+    max-width: calc(100vw - 32px);
+    width: 100%;
+    max-height: calc(100vh - 60px);
+    overflow-y: auto;
+    text-align: center;
+    animation: simpleFadeIn 0.2s ease-out;
+    transform: none;
+    margin: auto;
+    position: relative;
+}
+
+@keyframes simpleFadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.name-modal-title {
+    color: var(--text-dark);
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    line-height: 1.3;
+}
+
+.name-modal-text {
+    color: var(--text-dark);
+    font-size: 0.95rem;
+    margin-bottom: 16px;
+    opacity: 0.8;
+    line-height: 1.4;
+}
+
+/* Name Input Field - Optimized for All Devices */
+.name-input {
+    width: 100%;
+    padding: 12px 16px;
+    height: 48px;
+    font-size: 1rem;
+    border: 2px solid var(--accent-color);
+    border-radius: 12px;
+    outline: none;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.2s ease;
+    background-color: var(--card-bg);
+    color: var(--text-dark);
+    text-align: center;
+    transform: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.name-input:focus {
+    border-color: #5a3e2b;
+    box-shadow: 0 0 0 3px rgba(196, 154, 108, 0.2);
+    transform: scale(1.01);
+}
+
+.name-input::placeholder {
+    color: rgba(59, 42, 32, 0.5);
+}
+
+/* Name Save Button - Optimized for All Devices */
+.name-save-btn {
+    width: 100%;
+    padding: 0;
+    height: 50px;
+    margin-top: 16px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-light);
+    background: linear-gradient(135deg, var(--accent-color), #8b7355);
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.name-save-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(196, 154, 108, 0.4);
+}
+
+.name-save-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(196, 154, 108, 0.3);
+}
+
+/* Modal Note */
+.name-modal-note {
+    margin-top: 16px;
+    font-size: 0.8rem;
+    color: var(--text-dark);
+    opacity: 0.6;
+    line-height: 1.4;
+}
+
+/* Modal Buttons Container */
+.name-modal-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.name-modal-buttons button {
+    flex: 1;
+    padding: 0;
+    height: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Cancel Button */
+.name-cancel-btn {
+    color: var(--text-dark);
+    background-color: rgba(196, 154, 108, 0.2);
+}
+
+.name-cancel-btn:hover {
+    background-color: rgba(196, 154, 108, 0.35);
+    transform: translateY(-2px);
+}
+
+.name-cancel-btn:active {
+    transform: translateY(0);
+}
+
+/* Change Name Button (Profile Page) */
+.change-name-btn {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.7rem 1.5rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text-dark);
+    background-color: rgba(196, 154, 108, 0.2);
+    border: 2px solid var(--accent-color);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+}
+
+.change-name-btn:hover {
+    background-color: var(--accent-color);
+    color: var(--text-light);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(196, 154, 108, 0.3);
+}
+
+/* Dark Mode Adjustments */
+body.dark .navbar-greeting {
+    background-color: rgba(196, 154, 108, 0.15);
+}
+
+body.dark .name-input::placeholder {
+    color: rgba(245, 245, 245, 0.4);
+}
+
+body.dark .change-name-btn {
+    color: #f5f5f5;
+}
+
+/* Tablet and Desktop - Enhanced Modal */
+@media (min-width: 481px) {
+    .name-modal-content {
+        padding: 2.5rem 2rem;
+        max-width: 440px;
+        border-radius: 20px;
+    }
+    
+    .name-modal-title {
+        font-size: 1.75rem;
+        margin-bottom: 0.8rem;
+    }
+    
+    .name-modal-text {
+        font-size: 1.05rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .name-input {
+        height: 54px;
+        font-size: 1.05rem;
+    }
+    
+    .name-save-btn {
+        height: 54px;
+        font-size: 1.05rem;
+        margin-top: 1.5rem;
+    }
+    
+    .name-modal-note {
+        margin-top: 1.5rem;
+        font-size: 0.85rem;
+    }
+    
+    .name-modal-buttons {
+        flex-direction: row;
+        gap: 1rem;
+        margin-top: 1.5rem;
+    }
+    
+    .name-modal-buttons button {
+        height: 54px;
+        font-size: 1rem;
+    }
+}
+
+/* Mobile Navbar Greeting */
+@media (max-width: 768px) {
+    .navbar-greeting {
+        font-size: 0.85rem;
+        padding: 0.4rem 0.8rem;
+        margin-left: 0.5rem;
+    }
+}
+/* Lock SVG Progress Ring Geometry - Desktop First */
+.step-counter-card .progress-ring {
+    width: 280px;
+    height: 280px;
+    display: block;
+    margin: 0 auto;
+}
+
+.step-counter-card .progress-ring-circle-bg,
+.step-counter-card .progress-ring-circle {
+    r: 86;
+    cx: 100;
+    cy: 100;
+}
+
+/* Center step count text using absolute positioning */
+.step-counter-card .progress-container {
+    position: relative;
+    width: 280px;
+    height: 280px;
+    margin: 0 auto 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.step-counter-card .step-count-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    width: 100% !important;
+    pointer-events: none !important;
+}
+
+.step-counter-card .step-number {
+    font-size: 3rem !important;
+    font-weight: 700 !important;
+    color: var(--text-dark) !important;
+    line-height: 1 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.step-counter-card .step-label {
+    font-size: 1rem !important;
+    font-weight: 500 !important;
+    color: var(--accent-color) !important;
+    margin-top: 0.5rem !important;
+    line-height: 1 !important;
+    padding: 0 !important;
+}
+
+/* Lock card dimensions for desktop */
+.step-counter-card {
+    max-width: 400px !important;
+    margin: 0 auto !important;
+    padding: 2rem 1.5rem !important;
+}
+
+/* SINGLE MOBILE BREAKPOINT - Mobile-First Override */
+@media (max-width: 480px) {
+    /* Compact SVG for mobile */
+    .step-counter-card .progress-ring {
+        width: 160px !important;
+        height: 160px !important;
+    }
+
+    .step-counter-card .progress-ring-circle-bg,
+    .step-counter-card .progress-ring-circle {
+        r: 70 !important;
+        cx: 80 !important;
+        cy: 80 !important;
+    }
+
+    /* Adjust container for mobile */
+    .step-counter-card .progress-container {
+        width: 160px !important;
+        height: 160px !important;
+        margin: 0 auto 1rem !important;
+    }
+
+    /* Scale text for mobile */
+    .step-counter-card .step-number {
+        font-size: 2rem !important;
+        padding: 0 !important;
+    }
+
+    .step-counter-card .step-label {
+        font-size: 0.85rem !important;
+        margin-top: 0.3rem !important;
+        padding: 0 !important;
+    }
+
+    /* Compact card for mobile */
+    .step-counter-card {
+        max-width: 92vw !important;
+        padding: 16px !important;
+    }
+}
+
+/* ===================================================
+   GLOBAL RESPONSIVE FIX - FULL DEVICE SUPPORT
+   =================================================== */
+
+/* Global responsive safety */
+html, body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Prevent desktop width on mobile */
+body {
+  position: relative;
+}
+
+/* Fix Safari viewport bug */
+@supports (-webkit-touch-callout: none) {
+  body {
+    min-height: -webkit-fill-available;
+  }
+}
+
+/* Lock layout when modal is open */
+body.modal-open {
+  overflow: hidden !important;
+  position: fixed;
+  width: 100%;
+}
+
+/* ===== MOBILE/TABLET LAYOUT NORMALIZATION ===== */
+@media (max-width: 1024px) {
+
+  .container,
+  .container.dashboard {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .card,
+  .step-counter-card,
+  .dashboard-card {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+/* ===== DESKTOP/LAPTOP SAFETY ===== */
+@media (min-width: 1025px) {
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+}

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>FitTrack - Water Tracker</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="prefetch" href="index.html" as="document">
+    <link rel="prefetch" href="nutrition.html" as="document">
+</head>
+<body class="page-fade-in">
+    
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand">FitTrack</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="steps.html">Steps</a></li>
+                <li><a href="weekly.html">Weekly</a></li>
+                <li><a href="water.html" class="active">Water</a></li>
+                <li><a href="quotes.html">Quotes</a></li>
+                <li><a href="nutrition.html">Nutrition</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="progress.html">Progress</a></li>
+                <li><a href="distance.html">Distance</a></li>
+                <li><a href="images.html">Images</a></li>
+                <li><a href="settings.html">Settings</a></li>
+                <li><a href="about.html">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    
+    <div class="page-header">
+        <h1 class="page-title">Water Intake Tracker</h1>
+        <p class="page-subtitle">Stay hydrated! Goal: 8 glasses/day</p>
+    </div>
+
+    
+    <main class="container">
+        <div class="card">
+            <div class="dashboard-card-icon" style="font-size: 4rem; margin-bottom: 1rem;">💧</div>
+            
+            <h2 style="text-align: center; font-size: 2.5rem; color: var(--accent-color); margin-bottom: 1rem;">
+                <span id="waterCount">0</span> / 8
+            </h2>
+            <p style="text-align: center; font-size: 1.1rem; color: #8b7355; margin-bottom: 2rem;">Glasses</p>
+
+            
+            <div class="progress-bar-container">
+                <div class="progress-bar-fill" id="waterProgress" style="width: 0%;">
+                    <span id="waterPercentage">0%</span>
+                </div>
+            </div>
+
+            
+            <div id="waterGlasses" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin: 2rem 0;"></div>
+
+            
+            <button class="btn btn-full" id="addGlassBtn" style="margin-bottom: 1rem;">+ Add Glass</button>
+            <button class="btn btn-full btn-secondary" id="resetWaterBtn">Reset</button>
+
+            
+            <div class="status-message" id="statusMessage" style="margin-top: 1.5rem;">
+                Start tracking your water intake!
+            </div>
+        </div>
+    </main>
+
+    
+    <footer class="footer">
+        <p>&copy; 2026 FitTrack. All rights reserved.</p>
+    </footer>
+
+    <script src="theme.js" defer></script>
+    <script src="user-name.js" defer></script>
+    <script src="water.js" defer></script>
+</body>
+</html>

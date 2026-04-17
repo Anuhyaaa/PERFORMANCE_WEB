@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>FitTrack - Settings</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="prefetch" href="profile.html" as="document">
+</head>
+<body class="page-fade-in">
+    
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand">FitTrack</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="steps.html">Steps</a></li>
+                <li><a href="weekly.html">Weekly</a></li>
+                <li><a href="water.html">Water</a></li>
+                <li><a href="quotes.html">Quotes</a></li>
+                <li><a href="nutrition.html">Nutrition</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="progress.html">Progress</a></li>
+                <li><a href="distance.html">Distance</a></li>
+                <li><a href="images.html">Images</a></li>
+                <li><a href="settings.html" class="active">Settings</a></li>
+                <li><a href="about.html">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    
+    <div class="page-header">
+        <h1 class="page-title">Settings</h1>
+        <p class="page-subtitle">Customize your app experience</p>
+    </div>
+
+    
+    <main class="container">
+        <div class="card">
+            <h2 style="text-align: center; margin-bottom: 2rem; color: var(--text-dark);">⚙️ App Settings</h2>
+
+            
+            <div class="toggle-container">
+                <div>
+                    <div class="toggle-label">Dark Mode</div>
+                    <p style="font-size: 0.85rem; color: #8b7355; margin-top: 0.3rem;">Switch between light and dark themes</p>
+                    <p id="themeStatus" style="font-size: 0.9rem; font-weight: 600; margin-top: 0.5rem; color: var(--accent-color);">Theme: Light Mode</p>
+                </div>
+                <div class="toggle-switch" id="themeToggle" onclick="handleThemeToggle()">
+                    <div class="toggle-slider"></div>
+                </div>
+            </div>
+
+            
+            <div class="toggle-container">
+                <div>
+                    <div class="toggle-label">Notifications</div>
+                    <p style="font-size: 0.85rem; color: #8b7355; margin-top: 0.3rem;">Get reminders for water and steps</p>
+                    <p id="notificationStatus" style="font-size: 0.9rem; font-weight: 600; margin-top: 0.5rem; color: var(--accent-color);">Notifications: On</p>
+                </div>
+                <div class="toggle-switch" id="notificationToggle">
+                    <div class="toggle-slider"></div>
+                </div>
+            </div>
+
+            
+            <div class="toggle-container">
+                <div>
+                    <div class="toggle-label">Sound Effects</div>
+                    <p style="font-size: 0.85rem; color: #8b7355; margin-top: 0.3rem;">Play sounds for achievements</p>
+                    <p id="soundStatus" style="font-size: 0.9rem; font-weight: 600; margin-top: 0.5rem; color: var(--accent-color);">Sound Effects: On</p>
+                </div>
+                <div class="toggle-switch" id="soundToggle">
+                    <div class="toggle-slider"></div>
+                </div>
+            </div>
+
+            <div class="status-message" style="margin-top: 2rem;">
+                Settings are automatically saved
+            </div>
+        </div>
+    </main>
+
+    
+    <footer class="footer">
+        <p>&copy; 2026 FitTrack. All rights reserved.</p>
+    </footer>
+
+    <script src="theme.js" defer></script>
+    <script src="user-name.js" defer></script>
+    <script src="settings.js" defer></script>
+</body>
+</html>

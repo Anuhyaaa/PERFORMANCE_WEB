@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitTrack - Test Name Feature</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5efe6;
+        }
+        .test-card {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #5a3e2b;
+            text-align: center;
+        }
+        h2 {
+            color: #c49a6c;
+            border-bottom: 2px solid #c49a6c;
+            padding-bottom: 10px;
+        }
+        button {
+            background: #c49a6c;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+            font-size: 14px;
+        }
+        button:hover {
+            background: #8b7355;
+        }
+        .status {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .success {
+            background: #d4edda;
+            color: #155724;
+        }
+        .info {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <h1>🧪 FitTrack Name Feature - Testing Dashboard</h1>
+    
+    <div class="test-card">
+        <h2>📊 Current Status</h2>
+        <div id="currentStatus" class="status info">
+            Loading...
+        </div>
+    </div>
+
+    <div class="test-card">
+        <h2>🔍 Quick Tests</h2>
+        
+        <h3>Test 1: View Current Name</h3>
+        <button onclick="viewCurrentName()">View Current Name</button>
+        <div id="nameResult"></div>
+
+        <h3>Test 2: Set Test Name</h3>
+        <input type="text" id="testNameInput" placeholder="Enter test name" style="padding: 8px; margin: 5px; border: 1px solid #ccc; border-radius: 5px;">
+        <button onclick="setTestName()">Set Name</button>
+        <div id="setResult"></div>
+
+        <h3>Test 3: Clear Name (Simulate First Visit)</h3>
+        <button onclick="clearName()">Clear Name</button>
+        <p style="color: #666; font-size: 14px;">This will remove the name and refresh the page to show the prompt.</p>
+
+        <h3>Test 4: Navigate to Pages</h3>
+        <button onclick="window.location.href='index.html'">Go to Home</button>
+        <button onclick="window.location.href='profile.html'">Go to Profile</button>
+        <button onclick="window.location.href='steps.html'">Go to Steps</button>
+    </div>
+
+    <div class="test-card">
+        <h2>✅ Checklist</h2>
+        <div style="line-height: 2;">
+            <label><input type="checkbox"> Name prompt appears on first visit</label><br>
+            <label><input type="checkbox"> Name is saved in localStorage</label><br>
+            <label><input type="checkbox"> Navbar shows "Hi, [Name] 👋"</label><br>
+            <label><input type="checkbox"> Home page shows "Welcome back, [Name] 👋"</label><br>
+            <label><input type="checkbox"> Profile page shows name and avatar</label><br>
+            <label><input type="checkbox"> "Change Name" button works in profile</label><br>
+            <label><input type="checkbox"> Name persists across page navigation</label><br>
+            <label><input type="checkbox"> Modal design is user-friendly</label><br>
+        </div>
+    </div>
+
+    <div class="test-card">
+        <h2>🛠️ Developer Tools</h2>
+        <h3>Console Commands</h3>
+        <code>localStorage.getItem('fittrack_username')</code> - View name<br><br>
+        <code>localStorage.setItem('fittrack_username', 'YourName')</code> - Set name<br><br>
+        <code>localStorage.removeItem('fittrack_username')</code> - Remove name<br><br>
+        <code>localStorage.clear()</code> - Clear all data
+    </div>
+
+    <script>
+        function updateStatus() {
+            const statusDiv = document.getElementById('currentStatus');
+            const username = localStorage.getItem('fittrack_username');
+            
+            if (username) {
+                statusDiv.className = 'status success';
+                statusDiv.innerHTML = `✅ Name is set: <strong>${username}</strong>`;
+            } else {
+                statusDiv.className = 'status info';
+                statusDiv.innerHTML = '⚠️ No name set - First visit prompt will appear';
+            }
+        }
+
+        function viewCurrentName() {
+            const username = localStorage.getItem('fittrack_username');
+            const resultDiv = document.getElementById('nameResult');
+            
+            if (username) {
+                resultDiv.innerHTML = `<div class="status success">Current name: <strong>${username}</strong></div>`;
+            } else {
+                resultDiv.innerHTML = `<div class="status info">No name set</div>`;
+            }
+        }
+
+        function setTestName() {
+            const input = document.getElementById('testNameInput');
+            const name = input.value.trim();
+            const resultDiv = document.getElementById('setResult');
+            
+            if (name) {
+                localStorage.setItem('fittrack_username', name);
+                resultDiv.innerHTML = `<div class="status success">✓ Name set to: <strong>${name}</strong></div>`;
+                updateStatus();
+                input.value = '';
+            } else {
+                resultDiv.innerHTML = `<div class="status info">Please enter a name</div>`;
+            }
+        }
+
+        function clearName() {
+            if (confirm('This will clear your name and refresh the page. Continue?')) {
+                localStorage.removeItem('fittrack_username');
+                window.location.reload();
+            }
+        }
+        updateStatus();
+    </script>
+</body>
+</html>

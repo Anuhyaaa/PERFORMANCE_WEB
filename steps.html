@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>FitTrack - Step Counter</title>
+    
+    
+    
+    <link rel="stylesheet" href="style.css">
+    
+    
+    <link rel="prefetch" href="index.html" as="document">
+    <link rel="prefetch" href="weekly.html" as="document">
+    <link rel="prefetch" href="profile.html" as="document">
+</head>
+<body class="page-fade-in">
+    
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand">FitTrack</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="steps.html" class="active">Steps</a></li>
+                <li><a href="weekly.html">Weekly</a></li>
+                <li><a href="water.html">Water</a></li>
+                <li><a href="quotes.html">Quotes</a></li>
+                <li><a href="nutrition.html">Nutrition</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="progress.html">Progress</a></li>
+                <li><a href="distance.html">Distance</a></li>
+                <li><a href="images.html">Images</a></li>
+                <li><a href="settings.html">Settings</a></li>
+                <li><a href="about.html">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    
+    <div class="page-header">
+        <h1 class="page-title">Step Counter</h1>
+        <p class="page-subtitle" id="dateDisplay"></p>
+    </div>
+
+    
+    <main class="container">
+        <div class="card step-counter-card">
+            
+            <div class="progress-container">
+                <svg
+                  class="progress-ring"
+                  viewBox="0 0 200 200"
+                  width="280"
+                  height="280"
+                >
+                  
+                  <g transform="rotate(-90 100 100)">
+                    <circle
+                      class="progress-ring-circle-bg"
+                      stroke="#e5d8c8"
+                      stroke-width="14"
+                      fill="transparent"
+                      r="86"
+                      cx="100"
+                      cy="100"
+                    />
+                    <circle
+                      class="progress-ring-circle"
+                      stroke="#c49a6c"
+                      stroke-width="14"
+                      fill="transparent"
+                      r="86"
+                      cx="100"
+                      cy="100"
+                    />
+                  </g>
+                </svg>
+                
+                
+                <div class="step-count-text">
+                    <div class="step-number" id="stepNumber">0</div>
+                    <div class="step-label">Steps</div>
+                </div>
+            </div>
+
+            
+            <div class="daily-goal-text">Daily Goal: 10,000 steps</div>
+
+            
+            <div class="calories-container">
+                <div class="calories-icon">🔥</div>
+                <div class="calories-text">
+                    <span id="calories">0</span> kcal burned
+                </div>
+            </div>
+
+            
+            <div class="calories-container" style="margin-top: 1rem;">
+                <div class="calories-icon">📍</div>
+                <div class="calories-text">
+                    Distance: <span id="distance">0.00</span> km
+                </div>
+            </div>
+
+            
+            <button class="btn" id="startTrackingBtn" style="display: none;">Start Step Tracking</button>
+
+            
+            <button class="reset-btn" id="resetBtn">Reset Steps</button>
+
+            
+            <div class="status-message" id="statusMessage">
+                Loading step tracker...
+            </div>
+        </div>
+    </main>
+
+    
+    <footer class="footer">
+        <p>&copy; 2026 FitTrack. All rights reserved.</p>
+    </footer>
+
+    <script src="theme.js" defer></script>
+    <script src="user-name.js" defer></script>
+    <script src="steps.js" defer></script>
+</body>
+</html>

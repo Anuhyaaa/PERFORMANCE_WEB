@@ -10,9 +10,11 @@ FitTrack is a lightweight fitness web app for tracking daily movement and habits
 - Distance and calorie estimates
 - Daily motivation quotes
 - Nutrition and profile pages
+- Image formats showcase page
 - Theme and app settings
 - Service worker support for offline caching
 - Gulp-based build pipeline for minifying and optimizing assets
+- GitHub Actions workflow for validating HTML image references
 
 ## Pages
 
@@ -25,6 +27,7 @@ FitTrack is a lightweight fitness web app for tracking daily movement and habits
 - `profile.html` - profile page
 - `progress.html` - progress overview
 - `distance.html` - distance tracker
+- `images.html` - image formats showcase
 - `settings.html` - app settings
 - `about.html` - app overview
 
@@ -59,6 +62,19 @@ npm run build
 ```
 
 The build process minifies HTML, CSS, and JavaScript, and optimizes images.
+
+## CI Image Check
+
+This project includes a GitHub Actions workflow that validates local image references in HTML files:
+
+- Workflow file: `.github/workflows/image-load-check.yml`
+- Script: `scripts/check_images.py`
+
+You can run the same check locally:
+
+```bash
+python3 scripts/check_images.py
+```
 
 ## Step Tracking Note
 

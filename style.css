@@ -1,3 +1,13 @@
+@font-face {
+  font-family: "FitTrackFont";
+  src:
+    url("fonts/FitTrackFont.woff2") format("woff2"),
+    url("fonts/FitTrackFont.woff") format("woff");
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+}
+
 :root {
   --bg-color: #f5efe6;
   --navbar-bg: #5a3e2b;
@@ -22,6 +32,7 @@ html {
 }
 body {
   font-family:
+    "FitTrackFont",
     system-ui,
     -apple-system,
     BlinkMacSystemFont,
@@ -1050,6 +1061,23 @@ body.quotes-page.page-fade-in {
 }
 .quote-author {
   margin-top: 0;
+}
+.quote-method-label {
+  text-align: center;
+  font-size: 0.92rem;
+  color: var(--text-dark);
+  opacity: 0.82;
+  margin: 0 0 1rem;
+}
+.quote-actions {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.8rem;
+}
+@media (min-width: 768px) {
+  .quote-actions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 .quote-container #newQuoteBtn,
 .quote-container .btn,

@@ -24,6 +24,8 @@ const urlsToCache = [
   '/settings.js',
   '/profile.html',
   '/profile.js',
+  '/performance.html',
+  '/benchmark.js',
   '/about.html',
   '/nutrition.html',
   '/app.html'

@@ -20,7 +20,10 @@ const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)
 const quoteBox = document.getElementById('quoteBox');
 const quoteText = document.getElementById('quoteText');
 const quoteAuthor = document.getElementById('quoteAuthor');
-const newQuoteBtn = document.querySelector('.get-quote-btn') || document.getElementById('newQuoteBtn');
+const methodLabel = document.getElementById('methodLabel');
+const jqueryQuoteBtn = document.getElementById('jqueryQuoteBtn');
+const vanillaQuoteBtn = document.querySelector('#vanillaQuoteBtn');
+const legacyQuoteBtn = document.querySelector('.get-quote-btn') || document.getElementById('newQuoteBtn');
 let swapFrameId = 0;
 
 function getDailyQuote() {
@@ -43,6 +46,12 @@ function getRandomQuote() {
 	return quotes[randomIndex];
 }
 
+function setCurrentMethod(methodName) {
+	if (methodLabel) {
+		methodLabel.textContent = `Current Method: ${methodName}`;
+	}
+}
+
 function displayQuote(quote) {
 	if (quoteText) {
 		quoteText.textContent = `"${quote.text}"`;
@@ -53,7 +62,20 @@ function displayQuote(quote) {
 	}
 }
 
-function animateQuoteSwap(quote) {
+function resetQuoteTransitionStyles() {
+	if (!quoteText || !quoteAuthor) {
+		return;
+	}
+
+	quoteText.style.opacity = '';
+	quoteAuthor.style.opacity = '';
+	quoteText.style.transform = '';
+	quoteAuthor.style.transform = '';
+	quoteText.style.willChange = '';
+	quoteAuthor.style.willChange = '';
+}
+
+function animateQuoteSwapVanilla(quote) {
 	if (!quoteBox || !quoteText || !quoteAuthor) {
 		return;
 	}
@@ -98,12 +120,7 @@ function animateQuoteSwap(quote) {
 			applyOpacity(opacity);
 
 			if (opacity === 1) {
-				quoteText.style.opacity = '';
-				quoteAuthor.style.opacity = '';
-				quoteText.style.transform = '';
-				quoteAuthor.style.transform = '';
-				quoteText.style.willChange = '';
-				quoteAuthor.style.willChange = '';
+				resetQuoteTransitionStyles();
 				swapFrameId = 0;
 				return;
 			}
@@ -115,12 +132,67 @@ function animateQuoteSwap(quote) {
 	swapFrameId = requestAnimationFrame(tick);
 }
 
-function init() {
-	displayQuote(getDailyQuote());
+function animateQuoteSwapJQuery(quote) {
+	if (!quoteText || !quoteAuthor) {
+		return;
+	}
 
-	if (newQuoteBtn) {
-		newQuoteBtn.addEventListener('click', () => {
-			animateQuoteSwap(getRandomQuote());
+	if (swapFrameId) {
+		cancelAnimationFrame(swapFrameId);
+		swapFrameId = 0;
+		resetQuoteTransitionStyles();
+	}
+
+	if (!window.jQuery || prefersReducedMotion) {
+		displayQuote(quote);
+		return;
+	}
+
+	const $text = window.jQuery(quoteText);
+	const $author = window.jQuery(quoteAuthor);
+
+	$text.stop(true, true).fadeOut(180, () => {
+		$text.text(`"${quote.text}"`).fadeIn(180);
+	});
+
+	$author.stop(true, true).fadeOut(180, () => {
+		$author.text(`— ${quote.author}`).fadeIn(180);
+	});
+}
+
+function init() {
+	if (!quoteText || !quoteAuthor) {
+		return;
+	}
+
+	displayQuote(getDailyQuote());
+	setCurrentMethod('Vanilla JS');
+
+	if (vanillaQuoteBtn) {
+		vanillaQuoteBtn.addEventListener('click', () => {
+			setCurrentMethod('Vanilla JS');
+			animateQuoteSwapVanilla(getRandomQuote());
+		});
+	}
+
+	if (jqueryQuoteBtn) {
+		if (window.jQuery) {
+			window.jQuery(jqueryQuoteBtn).on('click', () => {
+				setCurrentMethod('jQuery');
+				animateQuoteSwapJQuery(getRandomQuote());
+			});
+		} else {
+			jqueryQuoteBtn.addEventListener('click', () => {
+				setCurrentMethod('Vanilla JS');
+				animateQuoteSwapVanilla(getRandomQuote());
+			});
+		}
+	}
+
+	if (!vanillaQuoteBtn && !jqueryQuoteBtn && legacyQuoteBtn) {
+		legacyQuoteBtn.addEventListener('click', () => {
+			setCurrentMethod('Vanilla JS');
+			animateQuoteSwapVanilla(getRandomQuote());
 		});
 	}
 }

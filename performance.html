@@ -3,12 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>FitTrack - Daily Motivation</title>
+    <title>FitTrack - Performance</title>
+
     <link rel="stylesheet" href="style.css">
+
     <link rel="prefetch" href="index.html" as="document">
+    <link rel="prefetch" href="progress.html" as="document">
+    <link rel="prefetch" href="profile.html" as="document">
 </head>
-<body class="page-fade-in quotes-page">
-    
+<body class="page-fade-in">
     <nav class="navbar">
         <div class="nav-container">
             <a href="index.html" class="nav-brand">FitTrack</a>
@@ -17,11 +20,11 @@
                 <li><a href="steps.html">Steps</a></li>
                 <li><a href="weekly.html">Weekly</a></li>
                 <li><a href="water.html">Water</a></li>
-                <li><a href="quotes.html" class="active">Quotes</a></li>
+                <li><a href="quotes.html">Quotes</a></li>
                 <li><a href="nutrition.html">Nutrition</a></li>
                 <li><a href="profile.html">Profile</a></li>
                 <li><a href="progress.html">Progress</a></li>
-                <li><a href="performance.html">Performance</a></li>
+                <li><a href="performance.html" class="active">Performance</a></li>
                 <li><a href="distance.html">Distance</a></li>
                 <li><a href="images.html">Images</a></li>
                 <li><a href="settings.html">Settings</a></li>
@@ -30,42 +33,26 @@
         </div>
     </nav>
 
-    
     <div class="page-header">
-        <h1 class="page-title">Daily Motivation</h1>
-        <p class="page-subtitle">Your daily dose of inspiration</p>
+        <h1 class="page-title">JavaScript Benchmark</h1>
+        <p class="page-subtitle">Compare loop speed and function timing in your browser</p>
     </div>
 
-    
     <main class="container">
-        <div class="card">
-            
-            <div class="quote-container" id="quoteBox">
-                <div class="quote-icon">💪</div>
-                <p class="quote-text" id="quoteText"></p>
-                <p class="quote-author" id="quoteAuthor"></p>
-            </div>
-
-            <p class="quote-method-label" id="methodLabel" aria-live="polite">Current Method: Vanilla JS</p>
-            <div class="quote-actions">
-                <button class="btn btn-full" id="jqueryQuoteBtn" type="button">Get Quote with jQuery</button>
-                <button class="btn btn-full" id="vanillaQuoteBtn" type="button">Get Quote with Vanilla JS</button>
-            </div>
-
-            <div class="status-message" style="margin-top: 1.5rem;">
-                A new quote is automatically shown each day!
-            </div>
-        </div>
+        <section class="card" aria-labelledby="benchmarkHeading">
+            <h2 id="benchmarkHeading" class="dashboard-card-title">Performance Test</h2>
+            <p class="mb-1">Run a quick benchmark to compare for loop and while loop timings plus a performance.now() sample workload.</p>
+            <button class="btn" id="runBenchmarkBtn" type="button">Run Benchmark</button>
+            <div id="benchmarkResults" class="status-message" style="margin-top: 1rem; display: none;"></div>
+        </section>
     </main>
 
-    
     <footer class="footer">
         <p>&copy; 2026 FitTrack. All rights reserved.</p>
     </footer>
 
     <script src="theme.js" defer></script>
     <script src="user-name.js" defer></script>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous" defer></script>
-    <script src="quotes.js" defer></script>
+    <script src="benchmark.js" defer></script>
 </body>
 </html>

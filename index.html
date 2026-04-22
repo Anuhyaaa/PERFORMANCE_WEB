@@ -8,17 +8,17 @@
     <title>FitTrack - Home Dashboard</title>
     <link rel="preload" href="style.css" as="style">
     <link rel="stylesheet" href="style.css">
-    <link rel="prefetch" href="/steps.html" as="document">
-    <link rel="prefetch" href="/weekly.html" as="document">
-    <link rel="prefetch" href="/water.html" as="document">
-    <link rel="prefetch" href="/quotes.html" as="document">
-    <link rel="prefetch" href="/nutrition.html" as="document">
-    <link rel="prefetch" href="/profile.html" as="document">
-    <link rel="prefetch" href="/progress.html" as="document">
-    <link rel="prefetch" href="/performance.html" as="document">
-    <link rel="prefetch" href="/distance.html" as="document">
-    <link rel="prefetch" href="/settings.html" as="document">
-    <link rel="prefetch" href="/about.html" as="document">
+    <link rel="prefetch" href="steps.html" as="document">
+    <link rel="prefetch" href="weekly.html" as="document">
+    <link rel="prefetch" href="water.html" as="document">
+    <link rel="prefetch" href="quotes.html" as="document">
+    <link rel="prefetch" href="nutrition.html" as="document">
+    <link rel="prefetch" href="profile.html" as="document">
+    <link rel="prefetch" href="progress.html" as="document">
+    <link rel="prefetch" href="performance.html" as="document">
+    <link rel="prefetch" href="distance.html" as="document">
+    <link rel="prefetch" href="settings.html" as="document">
+    <link rel="prefetch" href="about.html" as="document">
 
     <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-5Z5KQL3CRE"></script>
@@ -134,7 +134,7 @@ gtag('config', 'G-5Z5KQL3CRE');
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/service-worker.js')
+                navigator.serviceWorker.register('./service-worker.js')
                     .then((registration) => {
                         console.log('Service Worker registered successfully:', registration.scope);
                     })

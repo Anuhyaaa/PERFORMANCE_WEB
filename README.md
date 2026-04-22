@@ -63,6 +63,30 @@ npm run build
 
 The build process minifies HTML, CSS, and JavaScript, and optimizes images.
 
+## Run over HTTP/2 (trusted TLS, no browser warnings)
+
+```bash
+npm install
+npm run serve:http2
+```
+
+Then open `https://localhost:8443`.
+
+On first run only, the server automatically:
+
+1. Installs `mkcert` via Homebrew (macOS), `apt`/`dnf`/`pacman` (Linux), or `choco`/`scoop` (Windows) if it's not already installed.
+2. Installs a local certificate authority into your system + Firefox trust stores (`mkcert -install`). This is the only step that needs your password, and it happens once per machine.
+3. Issues a TLS certificate valid for `localhost`, `127.0.0.1`, and every LAN IP of the machine, so you can also open the URL from your phone on the same Wi-Fi.
+
+Subsequent runs skip all of that and start instantly. If the project folder is copied to a different computer, the server detects that and regenerates the cert on the new machine automatically.
+
+### How to verify HTTP/2 in the browser
+
+- **Chrome / Edge / Brave**: DevTools → Network → right-click the column header → enable **Protocol**. Every request should show `h2`.
+- **Firefox**: DevTools → Network → right-click column header → enable **Version**. Requests should show `HTTP/2`.
+- **Safari**: Develop → Show Web Inspector → Network → click any request → Headers panel shows `HTTP/2.0 200`.
+- **Terminal**: `curl -skI --http2 https://localhost:8443/ | head -1` prints `HTTP/2 200`.
+
 ## CI Image Check
 
 This project includes a GitHub Actions workflow that validates local image references in HTML files:

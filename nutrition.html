@@ -4,28 +4,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>FitTrack - Nutrition Guide</title>
+    <link rel="icon" href="data:,">
     
     
     
     <link rel="stylesheet" href="style.css">
+        <link rel="preload" href="assets/fonts/Poppins-Regular.woff2" as="font" type="font/woff2">
     
     
     <link rel="prefetch" href="index.html" as="document">
     <link rel="prefetch" href="water.html" as="document">
 
-    <!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-5Z5KQL3CRE"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
+        <script>
+        (function () {
+            const loadAnalytics = () => {
+                if (window.__fitTrackAnalyticsLoaded) {
+                    return;
+                }
+                window.__fitTrackAnalyticsLoaded = true;
+                const analyticsScript = document.createElement('script');
+                analyticsScript.async = true;
+                analyticsScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-5Z5KQL3CRE';
+                analyticsScript.onload = () => {
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag() { dataLayer.push(arguments); }
+                    window.gtag = gtag;
+                    gtag('js', new Date());
+                    gtag('config', 'G-5Z5KQL3CRE');
+                };
+                document.head.appendChild(analyticsScript);
+            };
 
-gtag('config', 'G-5Z5KQL3CRE');
-</script>
+            if ('requestIdleCallback' in window) {
+                requestIdleCallback(loadAnalytics, { timeout: 3000 });
+            } else {
+                window.addEventListener('load', () => setTimeout(loadAnalytics, 1500), { once: true });
+            }
+        })();
+        </script>
 
 </head>
 <body class="page-fade-in">
-    <script src="theme.js"></script>
+    <script src="theme.js" defer></script>
     <style>
         
         .container.nutrition-container {
@@ -244,7 +264,7 @@ gtag('config', 'G-5Z5KQL3CRE');
             
             <div class="food-card">
                 <div class="food-img">
-                    <img src="images/oats.webp" alt="Bowl of nutritious oats" loading="lazy">
+                    <img src="images/oats.webp" alt="Bowl of nutritious oats" loading="eager" fetchpriority="high" decoding="async">
                 </div>
                 <h3 class="food-name">Oats</h3>
                 <p class="food-benefit">Provides long-lasting energy.</p>

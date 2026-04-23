@@ -4,18 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>FitTrack - About</title>
+    <link rel="icon" href="data:,">
     <link rel="stylesheet" href="style.css">
+    <link rel="preload" href="assets/fonts/Poppins-Regular.woff2" as="font" type="font/woff2">
     <link rel="prefetch" href="index.html" as="document">
 
-    <!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-5Z5KQL3CRE"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
+    <script>
+    (function () {
+        const loadAnalytics = () => {
+            if (window.__fitTrackAnalyticsLoaded) {
+                return;
+            }
+            window.__fitTrackAnalyticsLoaded = true;
+            const analyticsScript = document.createElement('script');
+            analyticsScript.async = true;
+            analyticsScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-5Z5KQL3CRE';
+            analyticsScript.onload = () => {
+                window.dataLayer = window.dataLayer || [];
+                function gtag() { dataLayer.push(arguments); }
+                window.gtag = gtag;
+                gtag('js', new Date());
+                gtag('config', 'G-5Z5KQL3CRE');
+            };
+            document.head.appendChild(analyticsScript);
+        };
 
-gtag('config', 'G-5Z5KQL3CRE');
-</script>
+        if ('requestIdleCallback' in window) {
+            requestIdleCallback(loadAnalytics, { timeout: 3000 });
+        } else {
+            window.addEventListener('load', () => setTimeout(loadAnalytics, 1500), { once: true });
+        }
+    })();
+    </script>
 
 </head>
 <body class="page-fade-in">
@@ -50,7 +70,7 @@ gtag('config', 'G-5Z5KQL3CRE');
     
     <main class="container about-page">
         <article class="about-card">
-            <img src="images/about-fitness.webp" alt="Fitness tracking illustration" class="about-image" loading="lazy">
+            <img src="images/about-fitness.webp" alt="Fitness tracking illustration" class="about-image" loading="eager" fetchpriority="high" decoding="async">
 
             <section class="about-section">
                 <p class="about-kicker">About FitTrack</p>

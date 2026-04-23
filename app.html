@@ -460,16 +460,46 @@
     </footer>
 
     
+    <script>
+    (function () {
+        const loadedScripts = new Set();
+        const sectionScripts = {
+            steps: 'steps.js',
+            weekly: 'weekly.js',
+            water: 'water.js',
+            quotes: 'quotes.js',
+            profile: 'profile.js',
+            progress: 'progress.js',
+            settings: 'settings.js',
+            distance: 'distance.js'
+        };
+
+        window.ensureSectionScript = function (sectionId) {
+            const scriptSrc = sectionScripts[sectionId];
+
+            if (!scriptSrc || loadedScripts.has(scriptSrc)) {
+                return Promise.resolve();
+            }
+
+            loadedScripts.add(scriptSrc);
+
+            return new Promise((resolve, reject) => {
+                const script = document.createElement('script');
+                script.src = scriptSrc;
+                script.defer = true;
+                script.onload = () => resolve();
+                script.onerror = () => {
+                    loadedScripts.delete(scriptSrc);
+                    reject(new Error(`Failed to load ${scriptSrc}`));
+                };
+                document.head.appendChild(script);
+            });
+        };
+    })();
+    </script>
     <script src="theme.js" defer></script>
     <script src="user-name.js" defer></script>
     <script src="router.js" defer></script>
     <script src="index.js" defer></script>
-    <script src="steps.js" defer></script>
-    <script src="weekly.js" defer></script>
-    <script src="water.js" defer></script>
-    <script src="quotes.js" defer></script>
-    <script src="profile.js" defer></script>
-    <script src="progress.js" defer></script>
-    <script src="settings.js" defer></script>
 </body>
 </html>

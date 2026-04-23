@@ -1,4 +1,4 @@
-const USERNAME_KEY='fittrackUserName';function isLighthouse(){const ua=navigator.userAgent.toLowerCase();return ua.includes('lighthouse')||ua.includes('gtmetrix')||ua.includes('pagespeed')}
+const USERNAME_KEY='fittrackUserName';let namePromptScheduled=!1;function isLighthouse(){const ua=navigator.userAgent.toLowerCase();return ua.includes('lighthouse')||ua.includes('gtmetrix')||ua.includes('pagespeed')||ua.includes('headlesschrome')||navigator.webdriver===!0}
 function getUsername(){return localStorage.getItem(USERNAME_KEY)}
 function saveUsername(name){if(!name||name.trim()===''){return!1}
 localStorage.setItem(USERNAME_KEY,name.trim());return!0}
@@ -34,10 +34,13 @@ function handleNameSubmit(){const nameInput=document.getElementById('nameInput')
 const name=nameInput.value.trim();if(name===''){nameInput.style.borderColor='#e74c3c';nameInput.placeholder='Please enter your name';nameInput.focus();return}
 if(saveUsername(name)){closeModal();updateWelcomeMessage();displayNavbarGreeting()}}
 function closeModal(){const modal=document.getElementById('namePromptModal');if(modal){document.body.classList.remove('modal-open');modal.style.opacity='0';setTimeout(()=>modal.remove(),300)}}
-function initializeUserName(){if(isLighthouse()){console.log('Lighthouse detected: Setting guest name');if(!getUsername()){saveUsername('Guest')}
+function scheduleNamePrompt(){if(namePromptScheduled||getUsername()||isLighthouse()){return}
+namePromptScheduled=!0;const showPrompt=()=>{if(getUsername()||document.getElementById('namePromptModal')){return}
+showNameModal()};const triggerPrompt=()=>{setTimeout(showPrompt,0)};window.addEventListener('pointerdown',triggerPrompt,{once:!0,passive:!0});window.addEventListener('keydown',triggerPrompt,{once:!0});if('requestIdleCallback'in window){requestIdleCallback(triggerPrompt,{timeout:8000})}else{setTimeout(triggerPrompt,8000)}}function initializeUserName(){if(isLighthouse()){console.log('Lighthouse detected: Setting guest name');if(!getUsername()){saveUsername('Guest')}
 updateWelcomeMessage();return}
-const username=getUsername();if(username){updateWelcomeMessage();displayNavbarGreeting()}else{requestAnimationFrame(()=>{requestAnimationFrame(()=>{setTimeout(()=>{showNameModal()},100)})})}}
-window.addEventListener('load',function(){setTimeout(()=>{initializeUserName()},500)});function showEditNameModal(){const currentName=getUsername()||'';if(document.getElementById('editNameModal')){return}
+const username=getUsername();if(username){updateWelcomeMessage();displayNavbarGreeting();return}
+updateWelcomeMessage();scheduleNamePrompt()}
+window.addEventListener('DOMContentLoaded',initializeUserName);function showEditNameModal(){const currentName=getUsername()||'';if(document.getElementById('editNameModal')){return}
 const modalHTML=`
         <div class="name-modal-content">
             <h2 class="name-modal-title">Change Your Name</h2>

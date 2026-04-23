@@ -109,8 +109,16 @@
     <script defer src="user-name.js"></script>
     <script defer src="index.js"></script>
     <script>
+        const runWhenIdle = (callback) => {
+            if ('requestIdleCallback' in window) {
+                requestIdleCallback(callback, { timeout: 10000 });
+            } else {
+                setTimeout(callback, 10000);
+            }
+        };
+
         if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
+            runWhenIdle(() => {
                 navigator.serviceWorker.register('./service-worker.js')
                     .then((registration) => {
                         console.log('Service Worker registered successfully:', registration.scope);
@@ -124,7 +132,7 @@
         }
     </script> 
     <script>
-        window.addEventListener('load', () => {
+        runWhenIdle(() => {
             const analyticsScript = document.createElement('script');
             analyticsScript.async = true;
             analyticsScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-5Z5KQL3CRE';

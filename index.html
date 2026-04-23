@@ -108,8 +108,29 @@
     </footer>
 
     <script defer src="theme.js"></script>
-    <script defer src="user-name.js"></script>
-    <script defer src="index.js"></script>
+    <script>
+        (function () {
+            const loadHomeScripts = () => {
+                if (window.__fitTrackHomeScriptsLoaded) {
+                    return;
+                }
+                window.__fitTrackHomeScriptsLoaded = true;
+
+                ['user-name.js', 'index.js'].forEach((src) => {
+                    const script = document.createElement('script');
+                    script.src = src;
+                    script.defer = true;
+                    document.body.appendChild(script);
+                });
+            };
+
+            if ('requestIdleCallback' in window) {
+                requestIdleCallback(loadHomeScripts, { timeout: 4000 });
+            } else {
+                window.addEventListener('load', () => setTimeout(loadHomeScripts, 2000), { once: true });
+            }
+        })();
+    </script>
     <script>
         const runWhenIdle = (callback) => {
             if ('requestIdleCallback' in window) {

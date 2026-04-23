@@ -35,12 +35,12 @@ const name=nameInput.value.trim();if(name===''){nameInput.style.borderColor='#e7
 if(saveUsername(name)){closeModal();updateWelcomeMessage();displayNavbarGreeting()}}
 function closeModal(){const modal=document.getElementById('namePromptModal');if(modal){document.body.classList.remove('modal-open');modal.style.opacity='0';setTimeout(()=>modal.remove(),300)}}
 function scheduleNamePrompt(){if(namePromptScheduled||getUsername()||isLighthouse()){return}
-namePromptScheduled=!0;const showPrompt=()=>{if(getUsername()||document.getElementById('namePromptModal')){return}
-showNameModal()};const triggerPrompt=()=>{setTimeout(showPrompt,0)};window.addEventListener('pointerdown',triggerPrompt,{once:!0,passive:!0});window.addEventListener('keydown',triggerPrompt,{once:!0});if('requestIdleCallback'in window){requestIdleCallback(triggerPrompt,{timeout:8000})}else{setTimeout(triggerPrompt,8000)}}function initializeUserName(){if(isLighthouse()){console.log('Lighthouse detected: Setting guest name');if(!getUsername()){saveUsername('Guest')}
+namePromptScheduled=!0;const triggerPrompt=()=>{if(getUsername()||document.getElementById('namePromptModal')){return}
+showNameModal()};window.addEventListener('pointerdown',triggerPrompt,{once:!0,passive:!0});window.addEventListener('keydown',triggerPrompt,{once:!0});window.addEventListener('focus',triggerPrompt,{once:!0});setTimeout(triggerPrompt,12000)}function initializeUserName(){if(isLighthouse()){console.log('Lighthouse detected: Setting guest name');if(!getUsername()){saveUsername('Guest')}
 updateWelcomeMessage();return}
 const username=getUsername();if(username){updateWelcomeMessage();displayNavbarGreeting();return}
 updateWelcomeMessage();scheduleNamePrompt()}
-window.addEventListener('DOMContentLoaded',initializeUserName);function showEditNameModal(){const currentName=getUsername()||'';if(document.getElementById('editNameModal')){return}
+if(document.readyState==='loading'){window.addEventListener('DOMContentLoaded',initializeUserName)}else{initializeUserName()}function showEditNameModal(){const currentName=getUsername()||'';if(document.getElementById('editNameModal')){return}
 const modalHTML=`
         <div class="name-modal-content">
             <h2 class="name-modal-title">Change Your Name</h2>

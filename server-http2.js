@@ -1,16 +1,3 @@
-/**
- * Simple HTTP/2 static file server for FitTrack.
- *
- * - Serves files from ./dist (falls back to project root if dist is missing).
- * - Uses a self-signed TLS cert (generated on first run, cached in ./certs).
- *   HTTP/2 in browsers requires HTTPS, so a cert is mandatory.
- * - Pure JS cert generation via the `selfsigned` package → works on any
- *   machine with Node.js installed, no OpenSSL required.
- *
- * Run:   npm run serve:http2
- * Open:  https://localhost:8443
- */
-
 const http2 = require('http2');
 const fs = require('fs');
 const path = require('path');
@@ -26,8 +13,6 @@ const KEY_PATH = path.join(CERT_DIR, 'key.pem');
 const CRT_PATH = path.join(CERT_DIR, 'cert.pem');
 const TRUST_MARKER = path.join(CERT_DIR, '.trusted');
 
-// Augment PATH with common Homebrew locations so `which mkcert` / `which brew`
-// work even when Node was launched from a minimal shell (e.g. via an IDE).
 (function augmentPath() {
   const extra = ['/opt/homebrew/bin', '/opt/homebrew/sbin', '/usr/local/bin', '/usr/local/sbin'];
   const sep = process.platform === 'win32' ? ';' : ':';
@@ -46,8 +31,6 @@ function run(cmd, args, opts = {}) {
   return spawnSync(cmd, args, { stdio: 'inherit', ...opts });
 }
 
-// Try to install mkcert automatically using the system's package manager.
-// Returns path to mkcert on success, null on failure.
 function tryInstallMkcert() {
   if (which('mkcert')) return which('mkcert');
 
@@ -86,8 +69,6 @@ function tryInstallMkcert() {
   return null;
 }
 
-// Use mkcert to install a local CA and issue a cert trusted by browsers.
-// Returns true on success.
 function setupMkcertCert() {
   const mkcert = tryInstallMkcert();
   if (!mkcert) return false;
@@ -131,8 +112,6 @@ function getLanIPs() {
   return out;
 }
 
-// Fallback: generate a self-signed cert and try to trust it at the OS level
-// so browsers stop warning and Service Workers register.
 function trustSelfSignedCert() {
   try {
     if (process.platform === 'darwin') {
@@ -184,9 +163,6 @@ async function generateSelfSigned() {
   fs.writeFileSync(CRT_PATH, pems.cert);
 }
 
-// A per-machine fingerprint stored inside the trust marker. If the project
-// gets zipped and moved to another computer, this mismatch forces a fresh
-// cert + trust cycle on the new machine.
 function machineFingerprint() {
   return [
     os.hostname(),
@@ -224,14 +200,12 @@ async function ensureCerts() {
     return { key: fs.readFileSync(KEY_PATH), cert: fs.readFileSync(CRT_PATH) };
   }
 
-  // Preferred path: mkcert. Produces a cert that every browser already trusts.
   if (!haveCerts || !trusted) {
     if (setupMkcertCert()) {
       return { key: fs.readFileSync(KEY_PATH), cert: fs.readFileSync(CRT_PATH) };
     }
   }
 
-  // Fallback: self-signed + OS trust store.
   if (!haveCerts) {
     console.log('[http2] Falling back to self-signed certificate…');
     await generateSelfSigned();
@@ -247,9 +221,6 @@ async function ensureCerts() {
   return { key: fs.readFileSync(KEY_PATH), cert: fs.readFileSync(CRT_PATH) };
 }
 
-// Default to project root because the HTML references un-minified asset
-// names (style.css, index.js, …) that don't exist under ./dist (which
-// contains *.min.css / *.min.js). Set SERVE_DIST=1 to serve ./dist instead.
 const ROOT = process.env.SERVE_DIST === '1' && fs.existsSync(path.join(__dirname, 'dist'))
   ? path.join(__dirname, 'dist')
   : __dirname;
@@ -306,8 +277,6 @@ function handleRequest(req, res) {
 
   fs.stat(filePath, (err, stat) => {
     if (err || !stat.isFile()) {
-      // Fallback: try `.min.<ext>` (e.g. style.css → style.min.css) so the
-      // server also works when pointed at ./dist.
       const minCandidate = filePath.replace(/(\.[a-z0-9]+)$/i, '.min$1');
       if (minCandidate !== filePath && fs.existsSync(minCandidate)) {
         return stream(minCandidate, res);

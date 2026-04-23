@@ -8,27 +8,6 @@
     <title>FitTrack - Home Dashboard</title>
     <link rel="preload" href="style.css" as="style">
     <link rel="stylesheet" href="style.css">
-    <link rel="prefetch" href="steps.html" as="document">
-    <link rel="prefetch" href="weekly.html" as="document">
-    <link rel="prefetch" href="water.html" as="document">
-    <link rel="prefetch" href="quotes.html" as="document">
-    <link rel="prefetch" href="nutrition.html" as="document">
-    <link rel="prefetch" href="profile.html" as="document">
-    <link rel="prefetch" href="progress.html" as="document">
-    <link rel="prefetch" href="performance.html" as="document">
-    <link rel="prefetch" href="distance.html" as="document">
-    <link rel="prefetch" href="settings.html" as="document">
-    <link rel="prefetch" href="about.html" as="document">
-
-    <!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-5Z5KQL3CRE"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-
-gtag('config', 'G-5Z5KQL3CRE');
-</script>
 
 </head>
 <body class="page-fade-in">
@@ -129,8 +108,6 @@ gtag('config', 'G-5Z5KQL3CRE');
     <script defer src="theme.js"></script>
     <script defer src="user-name.js"></script>
     <script defer src="index.js"></script>
-    
-    
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
@@ -146,5 +123,20 @@ gtag('config', 'G-5Z5KQL3CRE');
             console.log('Service Workers are not supported in this browser.');
         }
     </script> 
+    <script>
+        window.addEventListener('load', () => {
+            const analyticsScript = document.createElement('script');
+            analyticsScript.async = true;
+            analyticsScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-5Z5KQL3CRE';
+            analyticsScript.onload = () => {
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                window.gtag = gtag;
+                gtag('js', new Date());
+                gtag('config', 'G-5Z5KQL3CRE');
+            };
+            document.head.appendChild(analyticsScript);
+        });
+    </script>
 </body>
 </html>

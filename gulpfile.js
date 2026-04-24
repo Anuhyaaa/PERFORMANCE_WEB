@@ -15,7 +15,7 @@ const paths = {
     html: ['*.html'],
     css: ['style.css'],
     js: ['*.js', '!gulpfile.js'],
-    images: ['images*'],
+    images: ['images/**/*', 'performance.jpg'],
     root: [
       'about.html',
       'app.html',
@@ -42,8 +42,7 @@ const css = () => {
   return gulp
     .src(paths.src.css)
     .pipe(cssnano())
-    .pipe(rename({ suffix: '.min' }))
-    .pipe(gulp.dest(`${paths.dist}/css`))
+    .pipe(gulp.dest(paths.dist))
     .pipe(browsersync.stream());
 };
 
@@ -57,8 +56,7 @@ const javascript = () => {
       })
     )
     .pipe(uglify())
-    .pipe(rename({ suffix: '.min' }))
-    .pipe(gulp.dest(`${paths.dist}/js`))
+    .pipe(gulp.dest(paths.dist))
     .pipe(browsersync.stream());
 };
 
@@ -76,7 +74,6 @@ const html = () => {
         removeStyleLinkTypeAttributes: true
       })
     )
-    .pipe(rename({ suffix: '.min' }))
     .pipe(gulp.dest(paths.dist))
     .pipe(browsersync.stream());
 };
@@ -97,7 +94,7 @@ const images = () => {
         })
       ])
     )
-    .pipe(gulp.dest(`${paths.dist}/images`));
+    .pipe(gulp.dest(paths.dist));
 };
 
 const serve = (done) => {

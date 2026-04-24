@@ -368,7 +368,7 @@ button[type="submit"]:focus-visible {
   display: block;
   width: 30px;
   height: 30px;
-  background-image: url("images/sprite.png");
+  background-image: url("performance.jpg");
   background-repeat: no-repeat;
   background-size: 240px 40px;
   transition: transform 0.2s;
